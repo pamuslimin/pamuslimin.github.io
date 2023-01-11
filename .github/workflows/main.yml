@@ -9,17 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.3.0
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3.6.0
         with:
-          node-version: 16
+          node-version: 16.x
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1.6.0
       - name: Build project
         run: npm run build
       - name: Upload production-ready build files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-pages-artifact@v1.0.7
         with:
           name: production-files
           path: ./dist
@@ -30,12 +30,12 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3.0.2
         with:
           name: production-files
           path: ./dist
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: NickSchimek/deploy_jamstack_action@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          build-dir: ./dist
