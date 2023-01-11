@@ -1,0 +1,19 @@
+@import "variables";
+.mantine-Notification-root {
+    background-color: var(--mantine-color-gray-8);
+    border-radius: 8px;
+    border-color: var(--mantine-color-gray-9);
+}
+
+.mantine-Notification-title {
+    color: #fff;
+}
+
+.mantine-Notification-closeButton {
+    color: #fff;
+
+    &:hover {
+        background-color: var(--mantine-color-gray-7);
+        color: #fff;
+    }
+}

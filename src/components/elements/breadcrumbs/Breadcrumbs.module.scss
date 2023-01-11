@@ -1,0 +1,6 @@
+.breadcrumb {
+  &:last-child {
+    pointer-events: none;
+    color: #343A40;
+  }
+}

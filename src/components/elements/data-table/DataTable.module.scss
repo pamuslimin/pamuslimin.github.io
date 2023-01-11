@@ -1,0 +1,130 @@
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2.5em 0em 1.5em 0em;
+}
+
+.filterSingle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 2.5em 0em 1.5em 0em;
+}
+
+.dataTable {
+  display: block;
+  box-sizing: border-box;
+
+  thead tr th {
+    color: var(--color-accent-white);
+
+    border: none;
+    background-color: var(--color-primary-500);
+
+    &:first-child {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+
+  tbody tr td {
+    border: none;
+    max-height: 32px;
+
+    &:first-child {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+
+  tbody tr {
+    border: none;
+
+    &:first-child {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+}
+
+
+.sorter {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  height: 100%;
+  width: 8px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+
+  & svg {
+    border-radius: 8px;
+  }
+}
+
+.resizer.isResizing {
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .resizer {
+    opacity: 0;
+  }
+
+  *:hover>.resizer {
+    opacity: 1;
+  }
+}
+
+// Disable Hover and Pointer Events on Table Row
+tr.emptyrow {
+  background-color: transparent !important;
+  pointer-events: none !important;
+
+  &:hover {
+    cursor: default;
+    pointer-events: none !important;
+    background-color: transparent !important;
+  }
+}
+
+.tableLayout {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  justify-content: space-between;
+}

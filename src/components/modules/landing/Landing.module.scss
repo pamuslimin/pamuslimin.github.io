@@ -1,0 +1,21 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 64px);
+}
+
+.grid {
+
+    min-width: 80%;
+
+    >div {
+        min-width: 300px;
+    }
+}
+
+// responsive max 1024
+@media (max-width: 1024px) {
+    .grid {
+        min-width: 600px !important;
+    }
+}
