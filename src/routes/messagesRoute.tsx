@@ -10,7 +10,7 @@ export const messagesRoute = {
   element: async () => import("@/components/modules/app/manager/ManagerModule").then(
     ({ default: Component }) => <Component />
   ),
-  
+
   meta: {
     breadcrumb: () => "Pesan"
   },
@@ -22,7 +22,6 @@ export const messagesRoute = {
         message: error.message,
       });
     }
-    console.log(data);
     return ({
       entity: "Pesan",
       items: data || [],
@@ -32,23 +31,21 @@ export const messagesRoute = {
           size: 10,
         },
         {
-          header: "Nama Lengkap",
-          accessorKey: "full_name"
+          header: "Pengirim",
+          accessorKey: "sender_name"
+        }, {
+          header: "No. Telpon",
+          accessorKey: "sender_phone"
+        }, {
+          header: "Subyek",
+          accessorKey: "subject"
         },
         {
-          header: "Umur",
-          accessorKey: "birthdate",
-          accessorFn: (row) => `${dayjs().diff(row?.birthdate, "year", false)} tahun`,
-        },
-        {
-          header: "Jenis Kelamin",
-          accessorFn: (row) => row?.gender ? "Laki Laki" : "Perempuan"
-        },
-        {
-          header: "Status",
-          accessorKey: "status",
+          header: "Replied",
+          accessorKey: "replied",
           cell: (ctx: any) => {
-            return <Badge color="green">{ctx?.cell?.getValue()}</Badge>;
+            const replied = ctx?.cell?.getValue() as boolean;
+            return <Badge color={replied ? "blue" : "green"}>{replied ? "Sudah Dibalas" : "Belum Dibalas"}</Badge>;
           }
         }, {
           header: "Aksi",

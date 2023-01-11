@@ -30,19 +30,15 @@ export const blogRoute = {
         {
           header: "No",
           size: 10,
+          cell: (ctx) => ctx?.row?.index + 1,
         },
         {
-          header: "Nama Lengkap",
-          accessorKey: "full_name"
+          header: "Judul",
+          accessorKey: "title"
         },
         {
-          header: "Umur",
-          accessorKey: "birthdate",
-          accessorFn: (row) => `${dayjs().diff(row?.birthdate, "year", false)} tahun`,
-        },
-        {
-          header: "Jenis Kelamin",
-          accessorFn: (row) => row?.gender ? "Laki Laki" : "Perempuan"
+          header: "Jumlah Kata",
+          accessorFn: (row) => `${row?.content?.split(" ").length}`,
         },
         {
           header: "Status",

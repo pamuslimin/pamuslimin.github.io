@@ -10,7 +10,7 @@ export const donationRoute = {
   element: async () => import("@/components/modules/app/manager/ManagerModule").then(
     ({ default: Component }) => <Component />
   ),
-  
+
   meta: {
     breadcrumb: () => "Donasi"
   },
@@ -30,27 +30,18 @@ export const donationRoute = {
         {
           header: "No",
           size: 10,
+          cell: (ctx) => ctx?.row?.index + 1,
         },
         {
-          header: "Nama Lengkap",
-          accessorKey: "full_name"
+          header: "Donatur",
+          accessorKey: "donorName"
         },
         {
-          header: "Umur",
-          accessorKey: "birthdate",
-          accessorFn: (row) => `${dayjs().diff(row?.birthdate, "year", false)} tahun`,
+          header: "Jumlah",
+          accessorKey: "amount",
+          accessorFn: (row) => `Rp. ${row?.amount}`,
         },
         {
-          header: "Jenis Kelamin",
-          accessorFn: (row) => row?.gender ? "Laki Laki" : "Perempuan"
-        },
-        {
-          header: "Status",
-          accessorKey: "status",
-          cell: (ctx: any) => {
-            return <Badge color="green">{ctx?.cell?.getValue()}</Badge>;
-          }
-        }, {
           header: "Aksi",
           cell: (ctx: any) => {
             return <Group>

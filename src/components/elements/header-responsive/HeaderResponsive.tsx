@@ -1,6 +1,6 @@
 import { createStyles, Header, Container, Group, Burger, Transition, Paper, Text, Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useNavigate } from "@tanstack/react-location";
+import { Link, useNavigate } from "@tanstack/react-location";
 import { useCallback, useState } from "react";
 
 const HEADER_HEIGHT = 60;
@@ -86,9 +86,9 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
     navigate({ to: "/auth/login" });
   }, [navigate]);
   const items = links.map((link) => (
-    <a
+    <Link
       key={link.label}
-      href={link.link}
+      hash={link.link}
       className={cx(classes.link, { [classes.linkActive]: active === link.link })}
       onClick={(event) => {
         event.preventDefault();
@@ -97,7 +97,7 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
       }}
     >
       {link.label}
-    </a>
+    </Link>
   ));
 
   return (

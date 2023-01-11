@@ -3,6 +3,7 @@ import DonationBox from "@/components/elements/donation-box/DonationBox";
 import { FeatureCard } from "@/components/elements/feature-card/FeatureCard";
 import { HeroAlt } from "@/components/elements/hero-alt/HeroAlt";
 import { Box, Button, Container, Grid, Group, Paper, SimpleGrid, Stack, Text, Title, useMantineTheme } from "@mantine/core";
+import { useScrollIntoView } from "@mantine/hooks";
 import { openContextModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 import { Check } from "phosphor-react";
@@ -12,20 +13,25 @@ import { NewsPage } from "./NewsPage";
 
 const LandingModule = () => {
   const theme = useMantineTheme();
+  
+  const { scrollIntoView: scrollAbout, targetRef: tAbout } = useScrollIntoView<HTMLDivElement>({ offset: 60 });
+  const { scrollIntoView: scrollDonation, targetRef: tDonate } = useScrollIntoView<HTMLDivElement>({ offset: 60 });
+  const { scrollIntoView: scrollContact, targetRef: tContact } = useScrollIntoView<HTMLDivElement>({ offset: 60 });
+  const { scrollIntoView: scrollNews, targetRef: tNews } = useScrollIntoView<HTMLDivElement>({ offset: 60 });
+  
   return (<>
     <HeroAlt />
 
-    <section id='about' >
+    <section id='about' ref={tAbout} >
       <AboutUs />
     </section>
-    <section id='donasi' >
+    <section id='donasi' ref={tDonate}>
       <DonationBox />
-
     </section>
-    <section id='kontak' style={{ marginTop: "5em" }} >
+    <section id='kontak' style={{ marginTop: "5em" }} ref={tContact}>
       <ContactPage />
     </section>
-    <section id='berita' >
+    <section id='berita' ref={tNews}>
       <NewsPage />
     </section>
 

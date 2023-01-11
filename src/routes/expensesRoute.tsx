@@ -3,6 +3,8 @@ import { ActionIcon, Badge, Group } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
+import "dayjs/locale/id";
+dayjs.locale("id");
 import { PencilSimple, TrashSimple } from "phosphor-react";
 
 export const expensesRoute = {
@@ -10,7 +12,7 @@ export const expensesRoute = {
   element: async () => import("@/components/modules/app/manager/ManagerModule").then(
     ({ default: Component }) => <Component />
   ),
-  
+
   meta: {
     breadcrumb: () => "Pengeluaran"
   },
@@ -26,31 +28,27 @@ export const expensesRoute = {
     return ({
       entity: "Pengeluaran",
       items: data || [],
+      meta: {page: 1, length: data?.length},
       columns: [
         {
           header: "No",
           size: 10,
-        },
-        {
-          header: "Nama Lengkap",
-          accessorKey: "full_name"
-        },
-        {
-          header: "Umur",
-          accessorKey: "birthdate",
-          accessorFn: (row) => `${dayjs().diff(row?.birthdate, "year", false)} tahun`,
-        },
-        {
-          header: "Jenis Kelamin",
-          accessorFn: (row) => row?.gender ? "Laki Laki" : "Perempuan"
-        },
-        {
-          header: "Status",
-          accessorKey: "status",
-          cell: (ctx: any) => {
-            return <Badge color="green">{ctx?.cell?.getValue()}</Badge>;
-          }
+          cell: (ctx) => ctx?.row?.index + 1,
         }, {
+          header: "Tanggal Keluar",
+          accessorKey: "date",
+          accessorFn: row => dayjs(row?.date).toString(),
+        },
+        {
+          header: "Deskripsi",
+          accessorKey: "description"
+        },
+        {
+          header: "Jumlah",
+          accessorKey: "amount",
+          accessorFn: (row) => `Rp. ${row?.amount}`
+        },
+        {
           header: "Aksi",
           cell: (ctx: any) => {
             return <Group>

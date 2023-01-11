@@ -29,6 +29,7 @@ export const orphanRoute = {
         {
           header: "No",
           size: 10,
+          cell: (ctx) => ctx?.row?.index + 1,
         },
         {
           header: "Nama Lengkap",
