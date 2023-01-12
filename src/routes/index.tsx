@@ -31,7 +31,7 @@ export const Routes: Route[] = [
           const { data: orpData, error: orpError } = await supabase.from("orphans").select("*");
           const { data: donData, error: donError } = await supabase.from("donations").select("amount, date").order("date", { ascending: false });
 
-          return ({ orpCount: orpData?.length, donCount: donData?.reduce((a, b) => a + b.amount, 0)})
+          return ({ orpCount: orpData?.length, donCount: donData?.reduce((a, b) => a + b.amount, 0) });
 
         },
       },
@@ -93,7 +93,7 @@ export const Routes: Route[] = [
           )),
         loader: async ({ params: { id } }) => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const {data: donors} = await supabase.from("donations").select("donorName, amount, date");
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date");
           return ({
             id,
             bankNumbers: data,
@@ -102,12 +102,11 @@ export const Routes: Route[] = [
         }
       },
       {
-        element: <Navigate to="/home"/>,
+        element: <Navigate to="/home" />,
       }
     ],
   },
-
   {
-    element: <Navigate to='/' />,
+    element: <Navigate to='/home' />,
   },
 ];
