@@ -79,12 +79,27 @@ export const Routes: Route[] = [
     ],
   },
   {
-    path: "/",
     element: async () =>
       import("@/components/shell/landing/LandingShell").then(({ default: Component }) => (
         <Component />
       )),
     children: [
+      {
+        path: "/",
+        element: async () =>
+          import("@/components/modules/landing/LandingModule").then(({ default: Component }) => (
+            <Component />
+          )),
+        loader: async () => {
+          const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date");
+          return ({
+            id: "home",
+            bankNumbers: data,
+            donors,
+          });
+        }
+      },
       {
         path: "/:id",
         element: async () =>
@@ -102,11 +117,9 @@ export const Routes: Route[] = [
         }
       },
       {
-        element: <Navigate to="/home" />,
+        element: <Navigate to="/" />,
       }
     ],
-  },
-  {
-    element: <Navigate to='/home' />,
-  },
+  }
+   
 ];
