@@ -2,6 +2,7 @@ import { ActionIcon, Card, Container, CopyButton, Group, Image, Stack, Table, Te
 import React from 'react';
 import QAR from "@/assets/QAR.png";
 import { Check, Copy } from 'phosphor-react';
+import { useMatch } from '@tanstack/react-location';
 type Props = {};
 
 type Donation = {
@@ -48,32 +49,17 @@ const donations: Donation[] = [
         date_created: new Date()
     }
 ];
-
-const bankNumbers: BankAccount[] = [
-    {
-        id: "1",
-        bankName: "Bank DKI",
-        bankNumber: "7122401511",
-        holderName: "Panti Muslimin Jaya",
-    },
-    {
-        id: "2",
-        bankName: "Bank Jago",
-        bankNumber: "7122401511",
-        holderName: "Panti Muslimin Jaya",
-    },
-    
-    {
-        id: "3",
-        bankName: "Bank Bukopin",
-        bankNumber: "7122401511",
-        holderName: "Panti Muslimin Jaya",
-    },
-];
+ 
 
 const DonationBox = (props: Props) => {
+    const {
+        data: {
+            bankNumbers,
+        }
+    }= useMatch();
+    const bankNumbs = bankNumbers as Array<any> || [];
     return (
-        <Container size="md" bg={"green"} p={16}>
+        <Container size="md" bg={"green"} p={16} mih={700}>
             <Title order={2} my={20} color="white">Mulai Berdonasi</Title>
             <Card w="100%" h={220} withBorder radius='md'>
 
@@ -82,24 +68,22 @@ const DonationBox = (props: Props) => {
                     <Image src={QAR} height='110px' width="110px" />
                     <Group>
                         {
-                            bankNumbers.map((number) => {
-                                return <Card shadow="xs">
-                                    <Group>
-                                        <Text color="blue">{number.bankName}</Text>
-                                        <CopyButton value={number.bankNumber} timeout={2000}>
-                                            {({ copied, copy }) => (
-                                                <Tooltip label={copied ? 'Disalin ke clipboard' : 'Salin Nomor'} withinPortal withArrow position="right">
-                                                    <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
-                                                        {copied ? <Check size={16} /> : <Copy size={16} />}
-                                                    </ActionIcon>
-                                                </Tooltip>
-                                            )}
-                                        </CopyButton>
-                                    </Group>
-                                    <Text color="dark">{number.bankNumber}</Text>
-                                    <Text color="dimmed">{number.holderName}</Text>
-                                </Card>;
-                            })
+                            bankNumbs?.map((number) => (<Card shadow="xs" key={number.bankNumber}>
+                                <Group>
+                                    <Text color="blue">{number.bankname}</Text>
+                                    <CopyButton value={number.banknumber} timeout={2000}>
+                                        {({ copied, copy }) => (
+                                            <Tooltip label={copied ? 'Disalin ke clipboard' : 'Salin Nomor'} withinPortal withArrow position="right">
+                                                <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
+                                                    {copied ? <Check size={16} /> : <Copy size={16} />}
+                                                </ActionIcon>
+                                            </Tooltip>
+                                        )}
+                                    </CopyButton>
+                                </Group>
+                                <Text color="dark">{number.banknumber}</Text>
+                                <Text color="dimmed">{number.holdername}</Text>
+                            </Card>))
                         }
                     </Group>
                 </Group>
@@ -122,16 +106,14 @@ const DonationBox = (props: Props) => {
                     </thead>
                     <tbody>
                         {
-                            donations.map(donation => (
-                                <>
+                            donations.map(donation => ( 
 
-                                    <tr>
+                                    <tr key={donation.id}>
                                         <td> {donation.id} </td>
                                         <td> {donation.name} </td>
                                         <td> {donation.amount} </td>
                                         <td> {donation.date_created.toLocaleString()}</td>
-                                    </tr>
-                                </>
+                                    </tr> 
                             ))
                         }
                     </tbody>

@@ -90,7 +90,7 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export function HeroAlt() {
+export function HeroAlt({ onDonateClick, onAboutClick }: any) {
     const { classes, cx } = useStyles();
 
     return (
@@ -112,10 +112,10 @@ export function HeroAlt() {
                 </Container>
 
                 <div className={classes.controls}>
-                    <Button className={classes.control} variant="white" size="lg">
+                    <Button className={classes.control} variant="white" size="lg" onClick={()=> onDonateClick?.()}>
                         Mulai Berdonasi
                     </Button>
-                    <Button className={cx(classes.control, classes.secondaryControl)} size="lg">
+                    <Button className={cx(classes.control, classes.secondaryControl)} size="lg" onClick={()=> onAboutClick?.()}>
                         Pelajari lebih lanjut
                     </Button>
                 </div>

@@ -5,6 +5,7 @@ const useStyles = createStyles((theme) => ({
     wrapper: {
         paddingTop: 80,
         paddingBottom: 50,
+        minHeight: "50vh",
     },
 
     item: {

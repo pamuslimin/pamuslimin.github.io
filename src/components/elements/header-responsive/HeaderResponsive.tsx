@@ -74,7 +74,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderResponsiveProps {
-  links: { link: string; label: string; }[];
+  links: { link?: string; onClick?: () => void, label: string; }[];
 }
 
 export function HeaderResponsive({ links }: HeaderResponsiveProps) {
@@ -88,10 +88,9 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   const items = links.map((link) => (
     <Link
       key={link.label}
-      hash={link.link}
+      to={link.link}
       className={cx(classes.link, { [classes.linkActive]: active === link.link })}
       onClick={(event) => {
-        event.preventDefault();
         setActive(link.link);
         close();
       }}
@@ -103,7 +102,7 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header} size="xl">
-        <Text tt="capitalize" size={24}>Muslimin Jaya</Text>
+        <Text component={Link} to="/home" tt="capitalize" size={24} onClick={(e)=> setActive("home")}>Muslimin Jaya</Text>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>

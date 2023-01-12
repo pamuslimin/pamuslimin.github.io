@@ -1,7 +1,7 @@
 import { FeatureStats } from "@/components/elements/feature-stats/FeatureStats"
 import { useMantineTheme } from "@mantine/core"
 import { useMatch } from "@tanstack/react-location";
-import { Calendar, Money, Users } from "phosphor-react"
+import { Calendar, ChatDots, Money, Users } from "phosphor-react"
 import styles from "./Dashboard.module.scss"
 
 const DashboardModule = () => {
@@ -27,7 +27,7 @@ const DashboardModule = () => {
         <FeatureStats
           icon={<Money weight='fill' color={theme.colors.orange[5]} size={32} />}
           title='Jumlah Donasi'
-          value={donCount ?? 0}
+          value={"Rp. " + donCount ?? 0}
         />
         <FeatureStats
           icon={<Users weight='fill' color={theme.colors.blue[5]} size={32} />}
@@ -35,8 +35,8 @@ const DashboardModule = () => {
           value={orpCount ?? 0}
         />
         <FeatureStats
-          icon={<Calendar weight='fill' color={theme.colors.green[5]} size={32} />}
-          title='Jumlah Kegiatan'
+          icon={<ChatDots weight='fill' color={theme.colors.green[5]} size={32} />}
+          title='Jumlah Pesan Masuk'
           value={"0"}
         />
         <span></span>
