@@ -20,7 +20,7 @@ export function useDataTable<T = any>({
   columns,
   state,
   setState,
-  pageSizer = true,
+  pageSizer = false,
   className,
   ...rest
 }: useDataTableProps<T>) {
@@ -41,8 +41,8 @@ export function useDataTable<T = any>({
   })
 
   const paginationPos = useMemo(
-    () => pagination.pageIndex * pagination.pageSize,
-    [pagination.pageIndex, pagination.pageSize],
+    () => pagination.pageIndex * data.meta?.pageSize,
+    [pagination.pageIndex, data.meta?.pageSize],
   )
 
   const paginationComponent = (

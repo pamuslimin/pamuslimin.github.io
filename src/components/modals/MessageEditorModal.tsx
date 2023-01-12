@@ -6,9 +6,10 @@ import dayjs from "dayjs";
 import { FormApi, SubmissionErrors } from "final-form";
 import { Field, Form } from "react-final-form";
 
-export const OrphanEditorModal = (props: ContextModalProps<{ onClick: (values: Record<string, any>) => void; initialValues: Record<string, any>; }>) => {
+export const MessageEditorModal = (props: ContextModalProps<{ onClick: (values: Record<string, any>) => void; initialValues: Record<string, any>; }>) => {
 
     const { context, id, innerProps } = props;
+
     return (<>
         <Form<OrphanModel> onSubmit={
             function (values: OrphanModel): void | SubmissionErrors | Promise<SubmissionErrors> {
@@ -20,58 +21,45 @@ export const OrphanEditorModal = (props: ContextModalProps<{ onClick: (values: R
                 <form onSubmit={handleSubmit}>
                     <SimpleGrid cols={2}>
                         <Field
-                            name="full_name"
+                            name="sender_name"
                             render={({ input, meta }) => (
-                                <TextInput label="Nama Lengkap" {...input} />
+                                <TextInput label="Pengirim" {...input} />
                             )}
                         />
                         <Field
-                            name="birthplace"
+                            name="sender_phone"
                             render={({ input, meta }) => (
-                                <TextInput label="Tempat Lahir" {...input} />
+                                <TextInput label="No. Telpon" {...input} />
                             )}
                         />
-
                         <Field
-                            name="birthdate"
+                            name="subject"
                             render={({ input, meta }) => (
-                                <DatePicker label="Tanggal Lahir" onChange={(v) => {
-                                    input.onChange(dayjs(v).format("YYYY-MM-DD"));
-                                }}
-                                    value={dayjs(input.value).toDate()} />
+                                <TextInput label="Subyek" {...input} />
                             )}
                         />
-
                         <Field
-                            name="gender"
+                            name="replied"
                             render={({ input, meta }) => (
-                                <Select label="Jenis Kelamin" data={[{ value: "false", label: "Perempuan" }, { value: "true", label: "Laki Laki" }]}
+                                <Select label="Dibalas" data={[{ value: "false", label: "Belum Dibalas" }, { value: "true", label: "Sudah Dibalas" }]}
                                     onChange={(v) => {
                                         input.onChange(v);
-                                        console.log(input.value);
-                                        console.log(v);
                                     }}
                                     value={`${input.value === "true" || input.value === true}`}
                                 />
                             )}
                         />
-                    </SimpleGrid>
+                    </SimpleGrid> 
                     <Field
-                        name="medical_history"
+                        name="message"
                         render={({ input, meta }) => (
-                            <Textarea label="Riwayat Medis" {...input} />
+                            <Textarea label="Pesan" {...input} />
                         )}
                     />
-                    <Field
-                        name="additional_info"
+                   <Field
+                        name="reply"
                         render={({ input, meta }) => (
-                            <Textarea label="Informasi Tambahan" {...input} />
-                        )}
-                    />
-                    <Field
-                        name="status"
-                        render={({ input, meta }) => (
-                            <TextInput label="Informasi Tambahan" {...input} />
+                            <Textarea label="Balasan" {...input} />
                         )}
                     />
 

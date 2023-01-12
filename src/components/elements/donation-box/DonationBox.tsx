@@ -3,6 +3,7 @@ import React from 'react';
 import QAR from "@/assets/QAR.png";
 import { Check, Copy } from 'phosphor-react';
 import { useMatch } from '@tanstack/react-location';
+import dayjs from 'dayjs';
 type Props = {};
 
 type Donation = {
@@ -19,45 +20,47 @@ type BankAccount = {
     bankName: string;
 };
 
-const donations: Donation[] = [
-    {
-        id: "1",
-        name: "Budi Gunawan",
-        amount: "Rp.1.000.000,-",
-        date_created: new Date(),
-    },
-    {
-        id: "2",
-        name: "Hamba Allah",
-        amount: "Rp.6.000.000,-",
-        date_created: new Date()
-    }, {
-        id: "3",
-        name: "Hamba Allah",
-        amount: "Rp.3.000.000,-",
-        date_created: new Date()
-    }, {
-        id: "4",
-        name: "Fulan",
-        amount: "Rp.9.000.000,-",
-        date_created: new Date()
-    }, {
-        id: "5",
+// const donations: Donation[] = [
+//     {
+//         id: "1",
+//         name: "Budi Gunawan",
+//         amount: "Rp.1.000.000,-",
+//         date_created: new Date(),
+//     },
+//     {
+//         id: "2",
+//         name: "Hamba Allah",
+//         amount: "Rp.6.000.000,-",
+//         date_created: new Date()
+//     }, {
+//         id: "3",
+//         name: "Hamba Allah",
+//         amount: "Rp.3.000.000,-",
+//         date_created: new Date()
+//     }, {
+//         id: "4",
+//         name: "Fulan",
+//         amount: "Rp.9.000.000,-",
+//         date_created: new Date()
+//     }, {
+//         id: "5",
 
-        name: "Fulanah",
-        amount: "Rp.4.500.000,-",
-        date_created: new Date()
-    }
-];
- 
+//         name: "Fulanah",
+//         amount: "Rp.4.500.000,-",
+//         date_created: new Date()
+//     }
+// ];
+
 
 const DonationBox = (props: Props) => {
     const {
         data: {
             bankNumbers,
+            donors
         }
-    }= useMatch();
+    } = useMatch();
     const bankNumbs = bankNumbers as Array<any> || [];
+    const donations = donors as Array<any> || [];
     return (
         <Container size="md" bg={"green"} p={16} mih={700}>
             <Title order={2} my={20} color="white">Mulai Berdonasi</Title>
@@ -106,14 +109,14 @@ const DonationBox = (props: Props) => {
                     </thead>
                     <tbody>
                         {
-                            donations.map(donation => ( 
+                            donations?.map((donation, index) => (
 
-                                    <tr key={donation.id}>
-                                        <td> {donation.id} </td>
-                                        <td> {donation.name} </td>
-                                        <td> {donation.amount} </td>
-                                        <td> {donation.date_created.toLocaleString()}</td>
-                                    </tr> 
+                                <tr key={donation.id}>
+                                    <td> {index + 1} </td>
+                                    <td> {donation.donorName} </td>
+                                    <td> {donation.amount} </td>
+                                    <td> {dayjs(donation.date).toString()}</td>
+                                </tr>
                             ))
                         }
                     </tbody>

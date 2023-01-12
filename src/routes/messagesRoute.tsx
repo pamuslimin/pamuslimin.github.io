@@ -1,9 +1,9 @@
-import { supabase } from "@/supabaseClient";
-import { ActionIcon, Badge, Group } from "@mantine/core";
-import { showNotification } from "@mantine/notifications";
+import { Badge } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
-import dayjs from "dayjs";
-import { PencilSimple, TrashSimple } from "phosphor-react";
+const table = 'messages';
+const editorModal = "message-editor";
+const entity = "Pesan";
+const filterColumn = "sender_name";
 
 const columns = [
   {
@@ -21,21 +21,13 @@ const columns = [
     accessorKey: "subject"
   },
   {
-    header: "Replied",
+    header: "Dibalas",
     accessorKey: "replied",
     cell: (ctx: any) => {
       const replied = ctx?.cell?.getValue() as boolean;
       return <Badge color={replied ? "blue" : "green"}>{replied ? "Sudah Dibalas" : "Belum Dibalas"}</Badge>;
     }
-  }, {
-    header: "Aksi",
-    cell: (_ctx: any) => {
-      return <Group>
-        <ActionIcon color="blue"><PencilSimple /></ActionIcon>
-        <ActionIcon color="red"><TrashSimple /></ActionIcon>
-      </Group>;
-    }
-  }
+  },
 ]satisfies ColumnDef<any, unknown>[];
 
 export const messagesRoute = {
@@ -47,21 +39,14 @@ export const messagesRoute = {
     breadcrumb: () => "Pesan"
   },
   loader: async () => {
-    const { data, error } = await supabase.from("messages").select("*");
-    if (error) {
-      showNotification({
-        title: "Error",
-        message: error.message,
-      });
-    }
+
 
     return ({
-      entity: "Pesan",
-      items: data || [],
-      columns: columns,
-      mutateAdd: () => { },
-      mutateEdit: () => { },
-      mutateDelete: () => { },
+      table,
+      entity,
+      editorModal,
+      columns,
+      filterColumn,
     });
   }
 };

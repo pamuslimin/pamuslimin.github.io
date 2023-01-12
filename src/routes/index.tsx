@@ -1,7 +1,5 @@
-import useQuery from "@/hooks/useQuery";
 import { supabase } from "@/supabaseClient";
 import { objectToParameters, parametersToObject } from "@/utils/queryParams";
-import { Breadcrumbs, Center } from "@mantine/core";
 import { Navigate, ReactLocation, Route } from "@tanstack/react-location";
 import { blogRoute } from "./blogRoute";
 import { donationRoute } from "./donationRoute";
@@ -80,7 +78,6 @@ export const Routes: Route[] = [
     ],
   },
   {
-    path: "/",
     element: async () =>
       import("@/components/shell/landing/LandingShell").then(({ default: Component }) => (
         <Component />
@@ -110,7 +107,7 @@ export const Routes: Route[] = [
           )),
         loader: async ({ params: { id } }) => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(1, 10).order('date');
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").order('date');
           return ({
             id,
             bankNumbers: data,
@@ -119,7 +116,7 @@ export const Routes: Route[] = [
         }
       },
       {
-        
+        element: <Navigate to={"/"}/>
       }
 
     ],
