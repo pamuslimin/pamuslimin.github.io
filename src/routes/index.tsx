@@ -28,10 +28,11 @@ export const Routes: Route[] = [
             ({ default: Component }) => <Component />,
           ),
         loader: async () => {
-          const { data: orpData, error: orpError } = await supabase.from("orphans").select("*");
+          const { data: orpData, error: orpError } = await supabase.from("orphans").select("id");
           const { data: donData, error: donError } = await supabase.from("donations").select("amount, date").order("date", { ascending: false });
+          const { data: msgData } = await supabase.from("messages").select("id");
 
-          return ({ orpCount: orpData?.length, donCount: donData?.reduce((a, b) => a + b.amount, 0) });
+          return ({ orpCount: orpData?.length, donCount: donData?.reduce((a, b) => a + b.amount, 0), msgCount: msgData?.length });
 
         },
       },
@@ -52,9 +53,9 @@ export const Routes: Route[] = [
         path: "/logout",
         element: <Navigate to='/auth/login' />,
       },
-      {
-        element: <Navigate to='/' />,
-      },
+      // {
+      //   element: <Navigate to='/' />,
+      // },
     ],
   },
   {
@@ -79,6 +80,7 @@ export const Routes: Route[] = [
     ],
   },
   {
+    path: "/",
     element: async () =>
       import("@/components/shell/landing/LandingShell").then(({ default: Component }) => (
         <Component />
@@ -92,7 +94,7 @@ export const Routes: Route[] = [
           )),
         loader: async () => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const { data: donors } = await supabase.from("donations").select("donorName, amount, date");
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(1, 10).order('date');
           return ({
             id: "home",
             bankNumbers: data,
@@ -108,7 +110,7 @@ export const Routes: Route[] = [
           )),
         loader: async ({ params: { id } }) => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const { data: donors } = await supabase.from("donations").select("donorName, amount, date");
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(1, 10).order('date');
           return ({
             id,
             bankNumbers: data,
@@ -117,9 +119,10 @@ export const Routes: Route[] = [
         }
       },
       {
-        element: <Navigate to="/" />,
+        
       }
+
     ],
   }
-   
+
 ];

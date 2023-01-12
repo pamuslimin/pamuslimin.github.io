@@ -8,7 +8,7 @@ const DashboardModule = () => {
   const theme = useMantineTheme()
   const {
     data: {
-      orpCount, donCount
+      orpCount, donCount, msgCount
     }
   } = useMatch();
 
@@ -37,7 +37,7 @@ const DashboardModule = () => {
         <FeatureStats
           icon={<ChatDots weight='fill' color={theme.colors.green[5]} size={32} />}
           title='Jumlah Pesan Masuk'
-          value={"0"}
+          value={msgCount ?? 0}
         />
         <span></span>
       </div>

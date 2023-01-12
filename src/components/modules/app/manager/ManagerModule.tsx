@@ -1,6 +1,7 @@
 import { useDataTable, useDataTableProps } from '@/components/elements/data-table/useDataTable';
 import SearchBar from '@/components/elements/search-bar/SearchBar';
 import { Button, Card, Container, Group, Stack } from '@mantine/core';
+import { openContextModal } from '@mantine/modals';
 import { useMatch } from '@tanstack/react-location';
 import { ColumnDef } from '@tanstack/react-table';
 import { Plus } from 'phosphor-react';
@@ -13,6 +14,7 @@ const ManagerModule = (props: Props) => {
         entity,
         items,
         columns,
+        editorModal,
         mutateAdd,
         mutateEdit,
         mutateDelete,
@@ -32,14 +34,20 @@ const ManagerModule = (props: Props) => {
         <Container size="xl">
             <Stack>
                 <Group position='apart' mt={16}>
-                    <Button leftIcon={<Plus weight='bold' />}>{`Tambah ${entity ?? "Entitas"}`}</Button>
+                    <Button leftIcon={<Plus weight='bold' />} onClick={()=> openContextModal({
+                        modal: editorModal as string,
+                        title: `Tambah ${entity ?? "Entitas"}`,
+                        innerProps: {
+                            onClick: mutateAdd,
+                            initialValue: {},
+                        }
+                    })}>{`Tambah ${entity ?? "Entitas"}`}</Button>
                     <SearchBar onClick={() => { }} />
                 </Group>
                 <Card withBorder p={0}>
                     {Component}
                 </Card>
             </Stack>
-
         </Container>
     );
 };
