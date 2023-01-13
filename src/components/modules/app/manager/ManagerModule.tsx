@@ -72,7 +72,7 @@ const ManagerModule = (props: Props) => {
 
     useEffect(() => {
         getAllItem?.(table as string);
-    }, []);
+    }, [table]);
 
     useEffect(() => {
         if (state?.pagination?.pageIndex) {

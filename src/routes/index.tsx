@@ -4,6 +4,7 @@ import { createHashHistory, Navigate, ReactLocation, Route } from "@tanstack/rea
 import { blogRoute } from "./blogRoute";
 import { donationRoute } from "./donationRoute";
 import { expensesRoute } from "./expensesRoute";
+import { managementRoute } from "./managementRoute";
 import { messagesRoute } from "./messagesRoute";
 import { orphanRoute } from "./orphanRoute";
 
@@ -73,13 +74,17 @@ export const Routes: Route[] = [
             loader: async () => {
               const { data: orpData, error: orpError } = await supabase.from("orphans").select("id");
               const { data: donData, error: donError } = await supabase.from("donations").select("amount, date").order("date", { ascending: false });
-              const { data: msgData } = await supabase.from("messages").select("id");
+              const { data: expData, error: expError } = await supabase.from("expenses").select("amount, date").order("date", { ascending: false });
+              const { count } = await supabase.from("messages").select("id", { count: "estimated"});
 
-              return ({ orpCount: orpData?.length, donCount: donData?.reduce((a, b) => a + b.amount, 0), msgCount: msgData?.length });
+              const donCount = donData?.reduce((a, b) => a + b.amount, 0) || 0;
+              const expCount = expData?.reduce((a, b) => a + b.amount, 0) || 0;
+              return ({ orpCount: orpData?.length, donCount: donCount, expCount: expCount, currCred: donCount - expCount, msgCount: count });
 
             },
           },
           orphanRoute,
+          managementRoute,
           expensesRoute,
           donationRoute,
           blogRoute,
@@ -94,7 +99,7 @@ export const Routes: Route[] = [
           },
           {
             path: "/logout",
-            element: <Navigate to='/auth/login' />,
+            element: <Navigate to='/home' />,
           },
           // {
           //   element: <Navigate to='/' />,
@@ -109,7 +114,7 @@ export const Routes: Route[] = [
           )),
         loader: async ({ params: { id } }) => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").order('date');
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(1, 10).order('date');
           return ({
             id,
             bankNumbers: data,

@@ -28,7 +28,7 @@ const   AuthMiddleware = ({ children }: { children: React.ReactNode; }) => {
       return navigate({ to: "/app/" });
     }
     if (pathname.match("/app/*") && !token) {
-      return navigate({ to: "/auth" });
+      return navigate({ to: "/main" });
     }
   }, [pathname]);
 

@@ -46,6 +46,9 @@ export const expensesRoute = {
       editorModal,
       columns,
       filterColumn,
+      initialValues: {
+        date: dayjs().format("YYYY-MM-DD")
+      }
     });
   }
 };

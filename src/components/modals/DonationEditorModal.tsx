@@ -37,10 +37,15 @@ export const DonationEditorModal = (props: ContextModalProps<{ onClick: (values:
                     <Field
                         name="optional_notes"
                         render={({ input, meta }) => (
+                            <TextInput label="Catatan Tambahan" {...input} />
+                        )}
+                    />
+                    <Field
+                        name="source"
+                        render={({ input, meta }) => (
                             <TextInput label="Sumber" {...input} />
                         )}
                     />
-
                     <Group position="apart" grow>
                         <Button fullWidth mt="md" variant="light" type="button" onClick={() => context.closeModal(id)}>
                             Batal

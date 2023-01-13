@@ -5,6 +5,7 @@ import {
   MagicWand,
   Money,
   TreeStructure,
+  UserCircleGear,
   Users,
   UsersThree
 } from "phosphor-react";
@@ -20,6 +21,11 @@ export const navList: NavbarLinkProps[] = [
     icon: (active: boolean) => <UsersThree size={24} weight={active ? "fill" : "regular"} />,
     label: "Anak Asuh",
     href: "./app/orphans",
+  },
+  {
+    icon: (active: boolean) => <UserCircleGear size={24} weight={active ? "fill" : "regular"} />,
+    label: "Pengurus",
+    href: "./app/managements",
   },
   {
     icon: (active: boolean) => <Export size={24} weight={active ? "fill" : "regular"} />,

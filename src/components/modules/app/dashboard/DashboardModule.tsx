@@ -8,7 +8,7 @@ const DashboardModule = () => {
   const theme = useMantineTheme();
   const {
     data: {
-      orpCount, donCount, msgCount
+      orpCount, donCount, expCount, currCred, msgCount
     }
   } = useMatch();
 
@@ -28,7 +28,7 @@ const DashboardModule = () => {
           <FeatureStats
             icon={<Money weight='fill' color={theme.colors.orange[5]} size={32} />}
             title='Kas Saat Ini'
-            value={"Rp. " + donCount ?? 0}
+            value={"Rp. " + currCred ?? 0}
           />
           <FeatureStats
             icon={<Money weight='fill' color={theme.colors.grape[5]} size={32} />}
@@ -38,7 +38,7 @@ const DashboardModule = () => {
           <FeatureStats
             icon={<Money weight='fill' color={theme.colors.orange[5]} size={32} />}
             title='Pengeluaran'
-            value={"Rp. " + donCount ?? 0}
+            value={"Rp. " + expCount ?? 0}
           />
           <FeatureStats
             icon={<Users weight='fill' color={theme.colors.blue[5]} size={32} />}
