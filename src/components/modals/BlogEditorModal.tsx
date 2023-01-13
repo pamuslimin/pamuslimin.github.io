@@ -32,7 +32,7 @@ export const BlogEditorModal = (props: ContextModalProps<{ onClick: (values: Rec
                     <Field
                         name="content"
                         render={({ input, meta }) => (
-                            <Textarea label="Informasi Tambahan" {...input} />
+                            <Textarea label="Konten" {...input} />
                         )}
                     />
 

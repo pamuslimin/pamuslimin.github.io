@@ -71,7 +71,7 @@ export const OrphanEditorModal = (props: ContextModalProps<{ onClick: (values: R
                     <Field
                         name="status"
                         render={({ input, meta }) => (
-                            <TextInput label="Informasi Tambahan" {...input} />
+                            <TextInput label="Status" {...input} />
                         )}
                     />
 

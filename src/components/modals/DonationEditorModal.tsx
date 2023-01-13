@@ -35,9 +35,9 @@ export const DonationEditorModal = (props: ContextModalProps<{ onClick: (values:
 
                     </SimpleGrid>
                     <Field
-                        name="status"
+                        name="optional_notes"
                         render={({ input, meta }) => (
-                            <TextInput label="Informasi Tambahan" {...input} />
+                            <TextInput label="Status" {...input} />
                         )}
                     />
 
