@@ -37,7 +37,7 @@ export const DonationEditorModal = (props: ContextModalProps<{ onClick: (values:
                     <Field
                         name="optional_notes"
                         render={({ input, meta }) => (
-                            <TextInput label="Status" {...input} />
+                            <TextInput label="Sumber" {...input} />
                         )}
                     />
 

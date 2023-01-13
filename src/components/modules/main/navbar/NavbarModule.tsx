@@ -2,6 +2,7 @@ import {
   Collapse,
   createStyles,
   Group,
+  Image,
   Navbar as BaseNavbar,
   Popover,
   ScrollArea,
@@ -22,7 +23,7 @@ import {
 } from "phosphor-react";
 import styles from "./Navbar.module.scss";
 import { navList } from "./navList";
-
+import logo from "@/assets/Logo.png";
 const useStyles = createStyles((theme) => ({
   link: {
     "&:hover": {
@@ -113,16 +114,17 @@ export function Navbar() {
 
   return (
     <BaseNavbar width={{ base: expanded ? 220 : 80 }} p='xs'  >
-      <BaseNavbar.Section mx='-xs' my={"xs"} px='xs'>
-        <Title
-          ta="center"
+      <BaseNavbar.Section mx='-xs' px='xs'>
+        {expanded ? <Title
+          ta="center" my={"xs"}
           className={styles.title}
           variant='gradient'
           order={3}
           gradient={{ from: "green", to: "cyan" }}
         >
-          {expanded ? "PA Muslimin Jaya" : "PA"}
+          PA Muslimin Jaya
         </Title>
+          : <Image src={logo}></Image>}
       </BaseNavbar.Section>
       <BaseNavbar.Section component={ScrollArea} grow mx='-xs' px='xs'>
         {links}

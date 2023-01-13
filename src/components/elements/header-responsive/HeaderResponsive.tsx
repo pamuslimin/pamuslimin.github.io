@@ -1,8 +1,8 @@
-import { createStyles, Header, Container, Group, Burger, Transition, Paper, Text, Button } from "@mantine/core";
+import { createStyles, Header, Container, Group, Burger, Transition, Paper, Text, Button, Image } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Link, useNavigate } from "@tanstack/react-location";
 import { useCallback, useState } from "react";
-
+import logo from "@/assets/Icon.png";
 const HEADER_HEIGHT = 60;
 const useStyles = createStyles((theme) => ({
   root: {
@@ -102,7 +102,10 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header} size="xl">
-        <Text component={Link} to="/home" tt="capitalize" size={24} onClick={(e)=> setActive("home")}>Muslimin Jaya</Text>
+        <Group>
+          <Image width={48} height={48} src={logo} />
+          <Text component={Link} to="/home" tt="capitalize" color="lime" size={24} onClick={(e) => setActive("home")}>Muslimin Jaya</Text>
+        </Group>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>

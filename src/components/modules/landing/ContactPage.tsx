@@ -10,7 +10,9 @@ import {
   ActionIcon,
   Container,
 } from '@mantine/core';
+import { useNavigate } from '@tanstack/react-location';
 import { MapPin, Phone } from 'phosphor-react';
+import { Field, Form } from 'react-final-form';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -79,6 +81,7 @@ const useStyles = createStyles((theme) => ({
 export function ContactPage() {
   const { classes } = useStyles();
 
+  const navigate = useNavigate();
 
   return (
     <Container size="xl">
@@ -101,30 +104,59 @@ export function ContactPage() {
             </Stack>
           </div>
           <div className={classes.form}>
-            <TextInput
-              label="Email"
-              placeholder="fulan@email.com"
-              required
-              classNames={{ input: classes.input, label: classes.inputLabel }}
-            />
-            <TextInput
-              label="Name"
-              placeholder="Fulan"
-              mt="md"
-              classNames={{ input: classes.input, label: classes.inputLabel }}
-            />
-            <Textarea
-              required
-              label="Pesan anda"
-              placeholder="isi dengan pesan minimal 30 kata"
-              minRows={4}
-              mt="md"
-              classNames={{ input: classes.input, label: classes.inputLabel }}
+            <Form onSubmit={
+              function (values: Record<string, any>): void {
+
+                const link = document.createElement("a");
+                link.setAttribute("href", "https://wa.me/6281213516824?text=" + encodeURIComponent(values.message),);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+              initialValues={{
+                message: "Hallo, Ingin makan"
+              }}
+              render={({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                  <Field
+                    name="sender_phone"
+                    render={({ input, meta }) => (
+                      <TextInput {...input} label="No. Telpon"
+                        placeholder="085131827474"
+                        required
+                        classNames={{ input: classes.input, label: classes.inputLabel }} />
+                    )}
+                  />
+                  <Field
+                    name="sender_name"
+                    render={({ input, meta }) => (
+                      <TextInput label="Nama" {...input}
+                        mt="md"
+                        classNames={{ input: classes.input, label: classes.inputLabel }} />
+                    )}
+                  />
+                  <Field
+                    name="message"
+                    render={({ input, meta }) => (
+
+                      <Textarea
+                        required
+                        label="Pesan anda"
+                        placeholder="isi dengan pesan minimal 30 kata"
+                        minRows={4}
+                        mt="md"
+                        classNames={{ input: classes.input, label: classes.inputLabel }} {...input}
+                      />
+                    )}
+                  />
+                  <Group position="right" mt="md">
+                    <Button className={classes.control} type="submit">Send message</Button>
+                  </Group>
+                </form>
+              )
+              }
             />
 
-            <Group position="right" mt="md">
-              <Button className={classes.control}>Send message</Button>
-            </Group>
           </div>
         </SimpleGrid>
       </div></Container>
