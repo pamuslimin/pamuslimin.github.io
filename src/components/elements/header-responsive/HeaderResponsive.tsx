@@ -110,7 +110,6 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
           {items}
         </Group>
 
-        <Button variant="light" onClick={handleLogin}>Masuk</Button>
 
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
 

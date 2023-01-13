@@ -3,13 +3,13 @@ import DonationBox from "@/components/elements/donation-box/DonationBox";
 import { FeatureCard } from "@/components/elements/feature-card/FeatureCard";
 import { HeaderResponsive } from "@/components/elements/header-responsive/HeaderResponsive";
 import { HeroAlt } from "@/components/elements/hero-alt/HeroAlt";
-import { AppShell, Box, Button, Container, Grid, Group, Paper, ScrollArea, SimpleGrid, Stack, Text, Title, useMantineTheme } from "@mantine/core";
+import { AppShell, Box, Button, Center, Container, Footer, Grid, Group, Paper, ScrollArea, SimpleGrid, Stack, Text, Title, useMantineTheme } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
 import { openContextModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
-import { useMatch } from "@tanstack/react-location";
+import { Link, useMatch, useNavigate } from "@tanstack/react-location";
 import { Check } from "phosphor-react";
-import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createRef, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ContactPage } from "./ContactPage";
 import styles from "./Landing.module.scss";
 import { NewsPage } from "./NewsPage";
@@ -40,6 +40,10 @@ const LandingModule = () => {
 
   }, [id]);
 
+  const navigate = useNavigate();
+  const handleLogin = useCallback(() => {
+    navigate({ to: "/auth/login" });
+  }, [navigate]);
   return (
     <AppShell header={<HeaderResponsive links={menus} />} padding={0} styles={{
       main: {
@@ -49,7 +53,11 @@ const LandingModule = () => {
         padding: 0,
         margin: 0,
       }
-    }}
+    }} footer={<Footer height={32}>
+      <Center>
+        <span>Copyright <Button p={0} variant="white" onClick={handleLogin}>&copy;</Button></span><span>{`${new Date().getFullYear()} - Tim Putaryu - Universitas Nusa Mandiri`}</span>
+      </Center>
+    </Footer>}
       fixed>
       <div id="container-main" style={{ height: "calc(100vh - 60px)", overflow: "scroll" }}  >
         <div className="section" id='hero'   >
