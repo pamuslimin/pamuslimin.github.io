@@ -65,7 +65,7 @@ export function AppContextProvider({ children }: PropsWithChildren<any>) {
       if (data) {
         setItems((old) => ({ ...old, [table]: [ ...data ] }));
         setMeta((old) => ({ ...old, [table]: { page: page, pageSize: pageSize, totalPage: ((count ?? pageSize) / pageSize) + 1, totalData: count ?? 0 } }));
-
+        console.log(items);
       }
 
 

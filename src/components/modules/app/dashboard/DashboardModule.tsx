@@ -1,11 +1,11 @@
-import { FeatureStats } from "@/components/elements/feature-stats/FeatureStats"
-import { useMantineTheme } from "@mantine/core"
+import { FeatureStats } from "@/components/elements/feature-stats/FeatureStats";
+import { SimpleGrid, useMantineTheme } from "@mantine/core";
 import { useMatch } from "@tanstack/react-location";
-import { Calendar, ChatDots, Money, Users } from "phosphor-react"
-import styles from "./Dashboard.module.scss"
+import { Calendar, ChatDots, Money, Users } from "phosphor-react";
+import styles from "./Dashboard.module.scss";
 
 const DashboardModule = () => {
-  const theme = useMantineTheme()
+  const theme = useMantineTheme();
   const {
     data: {
       orpCount, donCount, msgCount
@@ -24,24 +24,35 @@ const DashboardModule = () => {
         <h2>Silakan pilih menu pada sidebar</h2>
       </div>
       <div className={styles.features}>
-        <FeatureStats
-          icon={<Money weight='fill' color={theme.colors.orange[5]} size={32} />}
-          title='Jumlah Donasi'
-          value={"Rp. " + donCount ?? 0}
-        />
-        <FeatureStats
-          icon={<Users weight='fill' color={theme.colors.blue[5]} size={32} />}
-          title='Jumlah Anak Asuh'
-          value={orpCount ?? 0}
-        />
-        <FeatureStats
-          icon={<ChatDots weight='fill' color={theme.colors.green[5]} size={32} />}
-          title='Jumlah Pesan Masuk'
-          value={msgCount ?? 0}
-        />
-        <span></span>
+        <SimpleGrid cols={3}>
+          <FeatureStats
+            icon={<Money weight='fill' color={theme.colors.orange[5]} size={32} />}
+            title='Kas Saat Ini'
+            value={"Rp. " + donCount ?? 0}
+          />
+          <FeatureStats
+            icon={<Money weight='fill' color={theme.colors.grape[5]} size={32} />}
+            title='Donasi Masuk'
+            value={"Rp. " + donCount ?? 0}
+          />
+          <FeatureStats
+            icon={<Money weight='fill' color={theme.colors.orange[5]} size={32} />}
+            title='Pengeluaran'
+            value={"Rp. " + donCount ?? 0}
+          />
+          <FeatureStats
+            icon={<Users weight='fill' color={theme.colors.blue[5]} size={32} />}
+            title='Jumlah Anak Asuh'
+            value={orpCount ?? 0}
+          />
+          <FeatureStats
+            icon={<ChatDots weight='fill' color={theme.colors.green[5]} size={32} />}
+            title='Jumlah Pesan Masuk'
+            value={msgCount ?? 0}
+          />
+        </SimpleGrid>
       </div>
     </div>
-  )
-}
-export default DashboardModule
+  );
+};
+export default DashboardModule;

@@ -9,10 +9,8 @@ const LoginModule = () => {
   const onSubmit = async (values: any) => {
     try {
       const { email, password } = values;
-      const accessToken = "";
 
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-      console.log("data", data);
       if (error) throw error;
       localStorage.setItem("accessToken", data.session?.access_token ?? "");
       localStorage.setItem("profile", JSON.stringify(data.user));

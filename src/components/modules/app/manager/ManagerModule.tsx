@@ -71,7 +71,7 @@ const ManagerModule = (props: Props) => {
     }satisfies useDataTableProps<any>);
 
     useEffect(() => {
-        getAllItem?.(table as string, filterColumn as string ?? undefined);
+        getAllItem?.(table as string);
     }, []);
 
     useEffect(() => {

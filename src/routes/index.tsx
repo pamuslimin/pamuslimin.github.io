@@ -1,15 +1,21 @@
 import { supabase } from "@/supabaseClient";
 import { objectToParameters, parametersToObject } from "@/utils/queryParams";
-import { Navigate, ReactLocation, Route } from "@tanstack/react-location";
+import { createHashHistory, Navigate, ReactLocation, Route } from "@tanstack/react-location";
 import { blogRoute } from "./blogRoute";
 import { donationRoute } from "./donationRoute";
 import { expensesRoute } from "./expensesRoute";
 import { messagesRoute } from "./messagesRoute";
 import { orphanRoute } from "./orphanRoute";
 
+ // Create a hash history
+ const hashHistory = createHashHistory()
+ 
+ 
 export const LocationInstance = new ReactLocation({
   parseSearch: parametersToObject,
   stringifySearch: objectToParameters,
+
+  history: hashHistory,
 });
 
 export const Routes: Route[] = [

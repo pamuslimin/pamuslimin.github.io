@@ -71,22 +71,23 @@ const DonationBox = (props: Props) => {
                     <Image src={QAR} height='110px' width="110px" />
                     <Group>
                         {
-                            bankNumbs?.map((number) => (<Card shadow="xs" key={number.bankNumber}>
-                                <Group>
-                                    <Text color="blue">{number.bankname}</Text>
-                                    <CopyButton value={number.banknumber} timeout={2000}>
-                                        {({ copied, copy }) => (
-                                            <Tooltip label={copied ? 'Disalin ke clipboard' : 'Salin Nomor'} withinPortal withArrow position="right">
-                                                <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
-                                                    {copied ? <Check size={16} /> : <Copy size={16} />}
-                                                </ActionIcon>
-                                            </Tooltip>
-                                        )}
-                                    </CopyButton>
-                                </Group>
-                                <Text color="dark">{number.banknumber}</Text>
-                                <Text color="dimmed">{number.holdername}</Text>
-                            </Card>))
+                            bankNumbs?.map((number) => (
+                                <Card shadow="xs" key={number.bankNumber}>
+                                    <Group>
+                                        <Text color="blue">{number.bankname}</Text>
+                                        <CopyButton value={number.banknumber} timeout={2000}>
+                                            {({ copied, copy }) => (
+                                                <Tooltip label={copied ? 'Disalin ke clipboard' : 'Salin Nomor'} withinPortal withArrow position="right">
+                                                    <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
+                                                        {copied ? <Check size={16} /> : <Copy size={16} />}
+                                                    </ActionIcon>
+                                                </Tooltip>
+                                            )}
+                                        </CopyButton>
+                                    </Group>
+                                    <Text color="dark">{number.banknumber}</Text>
+                                    <Text color="dimmed">{number.holdername}</Text>
+                                </Card>))
                         }
                     </Group>
                 </Group>
@@ -110,7 +111,6 @@ const DonationBox = (props: Props) => {
                     <tbody>
                         {
                             donations?.map((donation, index) => (
-
                                 <tr key={donation.id}>
                                     <td> {index + 1} </td>
                                     <td> {donation.donorName} </td>

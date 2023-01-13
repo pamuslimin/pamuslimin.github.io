@@ -59,7 +59,6 @@ export const orphanRoute: Route = {
     breadcrumb: () => entityName
   },
   loader: async ({ search: { page, filter, ...searches } }) => {
-
     return ({
       table,
       entity: entityName,
