@@ -13,12 +13,13 @@ import { createRef, useCallback, useEffect, useLayoutEffect, useRef, useState } 
 import { ContactPage } from "./ContactPage";
 import styles from "./Landing.module.scss";
 import { NewsPage } from "./NewsPage";
+import { Testimonials } from "./Testimonials";
 const getPresetTop: Record<string, number> = {
   "home": 0,
   "about": 540,
-  "donation": 1000,
-  "contacts": 2040,
-  "news": 2700,
+  "donation": 1500,
+  "contacts": 2600,
+  "news": 3200,
 };
 const LandingModule = () => {
   const {
@@ -61,10 +62,13 @@ const LandingModule = () => {
       fixed>
       <div id="container-main" style={{ height: "calc(100vh - 60px)", overflow: "scroll" }}  >
         <div className="section" id='hero'   >
-          <HeroAlt onDonateClick={() => window?.scrollTo({ top: 500 })} onAboutClick={() => window?.scrollTo({ top: 200 })} />
+          <HeroAlt onDonateClick={() => navigate({ to: "/donation" })} />
         </div>
         <div className="section" id='about'   >
           <AboutUs />
+        </div>
+        <div className="section" id='about'>
+          <Testimonials />
         </div>
         <div className="section" id='donation'>
           <DonationBox />

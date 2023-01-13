@@ -3,8 +3,8 @@ import { Image, Text, Container, ThemeIcon, Title, SimpleGrid, createStyles } fr
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
-        paddingTop: 80,
-        paddingBottom: 50,
+        paddingTop: 120,
+        paddingBottom: 120,
         minHeight: "50vh",
     },
 
@@ -67,7 +67,7 @@ export function AboutUs({ }: any) {
     const { classes } = useStyles();
 
     return (
-        <Container size={700} className={classes.wrapper}>
+        <Container size="md" className={classes.wrapper}>
             <Text className={classes.supTitle}>Tentang kami</Text>
 
             <Title className={classes.title} order={2}>

@@ -1,4 +1,4 @@
-import { ActionIcon, Card, Container, CopyButton, Group, Image, Stack, Table, Text, Title, Tooltip } from '@mantine/core';
+import { ActionIcon, Box, Card, Container, CopyButton, Group, Image, Stack, Table, Text, Title, Tooltip } from '@mantine/core';
 import React from 'react';
 import QAR from "@/assets/QAR.png";
 import { Check, Copy } from 'phosphor-react';
@@ -62,8 +62,9 @@ const DonationBox = (props: Props) => {
     const bankNumbs = bankNumbers as Array<any> || [];
     const donations = donors as Array<any> || [];
     return (
-        <Container size="md" bg={"green"} p={16} mih={700}>
-            <Title order={2} my={20} color="white">Mulai Berdonasi</Title>
+        <Box bg={"green"}>
+        <Container size="xl"  p={48} mih={780}>
+            <Title ta="center" order={2} mb={32} color="white">Mulai Berdonasi</Title>
             <Card w="100%" h={220} withBorder radius='md'>
 
                 <Group align="center" h={170} >
@@ -95,7 +96,7 @@ const DonationBox = (props: Props) => {
             </Card>
 
 
-            <Card mt={16} shadow="sm" p={0} withBorder style={{ minHeight: 700 }}>
+            <Card mt={16} shadow="sm" p={0} radius="md" withBorder style={{ minHeight: 700 }}>
                 <Text ta="center" size={18} p={12}>
                     Terimakasih kepada para donatur yang sudah berdonasi.</Text>
 
@@ -121,7 +122,7 @@ const DonationBox = (props: Props) => {
                         }
                     </tbody>
                 </Table></Card>
-        </Container>
+        </Container></Box>
     );
 };
 

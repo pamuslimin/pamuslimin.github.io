@@ -7,10 +7,10 @@ import { expensesRoute } from "./expensesRoute";
 import { messagesRoute } from "./messagesRoute";
 import { orphanRoute } from "./orphanRoute";
 
- // Create a hash history
- const hashHistory = createHashHistory()
- 
- 
+// Create a hash history
+const hashHistory = createHashHistory();
+
+
 export const LocationInstance = new ReactLocation({
   parseSearch: parametersToObject,
   stringifySearch: objectToParameters,
@@ -20,75 +20,28 @@ export const LocationInstance = new ReactLocation({
 
 export const Routes: Route[] = [
   {
-    path: "/app",
-    element: async () =>
-      import("@/components/shell/main/MainShell").then(({ default: Component }) => <Component />),
-
     children: [
       {
-        path: "/",
+        path: "/auth",
         element: async () =>
-          import("@/components/modules/app/dashboard/DashboardModule").then(
-            ({ default: Component }) => <Component />,
-          ),
-        loader: async () => {
-          const { data: orpData, error: orpError } = await supabase.from("orphans").select("id");
-          const { data: donData, error: donError } = await supabase.from("donations").select("amount, date").order("date", { ascending: false });
-          const { data: msgData } = await supabase.from("messages").select("id");
-
-          return ({ orpCount: orpData?.length, donCount: donData?.reduce((a, b) => a + b.amount, 0), msgCount: msgData?.length });
-
-        },
+          import("@/components/shell/auth/AuthShell").then(({ default: Component }) => <Component />),
+        children: [
+          {
+            path: "/login",
+            element: async () =>
+              import("@/components/modules/auth/login/LoginModule").then(({ default: Component }) => (
+                <Component />
+              )),
+          },
+          {
+            path: "/register",
+            element: async () =>
+              import("@/components/modules/auth/register/RegisterModule").then(
+                ({ default: Component }) => <Component />,
+              ),
+          },
+        ],
       },
-      orphanRoute,
-      expensesRoute,
-      donationRoute,
-      blogRoute,
-      messagesRoute,
-      {
-        path: "/settings",
-        element: async () =>
-          import("@/components/modules/app/settings/SettingsModule").then(
-            ({ default: Component }) => <Component />,
-          ),
-        meta: { breadcrumb: () => <>Pengaturan</> },
-      },
-      {
-        path: "/logout",
-        element: <Navigate to='/auth/login' />,
-      },
-      // {
-      //   element: <Navigate to='/' />,
-      // },
-    ],
-  },
-  {
-    path: "/auth",
-    element: async () =>
-      import("@/components/shell/auth/AuthShell").then(({ default: Component }) => <Component />),
-    children: [
-      {
-        path: "/login",
-        element: async () =>
-          import("@/components/modules/auth/login/LoginModule").then(({ default: Component }) => (
-            <Component />
-          )),
-      },
-      {
-        path: "/register",
-        element: async () =>
-          import("@/components/modules/auth/register/RegisterModule").then(
-            ({ default: Component }) => <Component />,
-          ),
-      },
-    ],
-  },
-  {
-    element: async () =>
-      import("@/components/shell/landing/LandingShell").then(({ default: Component }) => (
-        <Component />
-      )),
-    children: [
       {
         path: "/",
         element: async () =>
@@ -104,6 +57,49 @@ export const Routes: Route[] = [
             donors,
           });
         }
+      },
+      {
+        path: "/app",
+        element: async () =>
+          import("@/components/shell/main/MainShell").then(({ default: Component }) => <Component />),
+
+        children: [
+          {
+            path: "/",
+            element: async () =>
+              import("@/components/modules/app/dashboard/DashboardModule").then(
+                ({ default: Component }) => <Component />,
+              ),
+            loader: async () => {
+              const { data: orpData, error: orpError } = await supabase.from("orphans").select("id");
+              const { data: donData, error: donError } = await supabase.from("donations").select("amount, date").order("date", { ascending: false });
+              const { data: msgData } = await supabase.from("messages").select("id");
+
+              return ({ orpCount: orpData?.length, donCount: donData?.reduce((a, b) => a + b.amount, 0), msgCount: msgData?.length });
+
+            },
+          },
+          orphanRoute,
+          expensesRoute,
+          donationRoute,
+          blogRoute,
+          messagesRoute,
+          {
+            path: "/settings",
+            element: async () =>
+              import("@/components/modules/app/settings/SettingsModule").then(
+                ({ default: Component }) => <Component />,
+              ),
+            meta: { breadcrumb: () => <>Pengaturan</> },
+          },
+          {
+            path: "/logout",
+            element: <Navigate to='/auth/login' />,
+          },
+          // {
+          //   element: <Navigate to='/' />,
+          // },
+        ],
       },
       {
         path: "/:id",
@@ -122,10 +118,12 @@ export const Routes: Route[] = [
         }
       },
       {
-        element: <Navigate to={"/"}/>
+        element: <Navigate to={"/"} />
       }
 
     ],
-  }
+  },
+
+
 
 ];
