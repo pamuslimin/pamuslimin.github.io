@@ -45,7 +45,14 @@ export const DonationEditorModal = (props: ContextModalProps<{ onClick: (values:
                         render={({ input, meta }) => (
                             <TextInput label="Sumber" {...input} />
                         )}
-                    />
+                    /> <Field
+                    name="source"
+                    render={({ input, meta }) => (
+                        <Select label="Status" data={[{ value: "ovo", label: "OVO" }, { value: "transfer bank", label: "Transfer Bank" }, {value: "Cash", label:"Cash"}]}
+                            {...input}
+                        />
+                    )}
+                />
                     <Group position="apart" grow>
                         <Button fullWidth mt="md" variant="light" type="button" onClick={() => context.closeModal(id)}>
                             Batal

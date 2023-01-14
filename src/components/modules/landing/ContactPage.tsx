@@ -120,6 +120,7 @@ export function ContactPage() {
                 <form onSubmit={handleSubmit}>
                   <Field
                     name="sender_phone"
+                    validate={(x) => x !== ""}
                     render={({ input, meta }) => (
                       <TextInput {...input} label="No. Telepon"
                         placeholder="085131827474"
@@ -129,9 +130,12 @@ export function ContactPage() {
                   />
                   <Field
                     name="sender_name"
+                    validate={(x) => x !== ""}
                     render={({ input, meta }) => (
                       <TextInput label="Nama" {...input}
                         mt="md"
+                        required
+                        placeholder='Rahmat'
                         classNames={{ input: classes.input, label: classes.inputLabel }} />
                     )}
                   />

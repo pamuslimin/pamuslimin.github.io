@@ -57,12 +57,6 @@ export const OrphanEditorModal = (props: ContextModalProps<{ onClick: (values: R
                         />
                     </SimpleGrid>
                     <Field
-                        name="medical_history"
-                        render={({ input, meta }) => (
-                            <Textarea label="Riwayat Medis" {...input} />
-                        )}
-                    />
-                    <Field
                         name="additional_info"
                         render={({ input, meta }) => (
                             <Textarea label="Informasi Tambahan" {...input} />
@@ -71,9 +65,12 @@ export const OrphanEditorModal = (props: ContextModalProps<{ onClick: (values: R
                     <Field
                         name="status"
                         render={({ input, meta }) => (
-                            <TextInput label="Status" {...input} />
+                            <Select label="Status" data={[{ value: "aktif", label: "Aktif" }, { value: "nonaktif", label: "Non Aktif" }]}
+                                {...input}
+                            />
                         )}
                     />
+
 
                     <Group position="apart" grow>
                         <Button fullWidth mt="md" variant="light" type="button" onClick={() => context.closeModal(id)}>
