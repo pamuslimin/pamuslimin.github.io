@@ -1,4 +1,5 @@
 import { FeatureStats } from "@/components/elements/feature-stats/FeatureStats";
+import MoneySpan from "@/components/elements/money-span/MoneySpan";
 import { SimpleGrid, useMantineTheme } from "@mantine/core";
 import { useMatch } from "@tanstack/react-location";
 import { Calendar, ChatDots, Money, Users } from "phosphor-react";
@@ -28,17 +29,17 @@ const DashboardModule = () => {
           <FeatureStats
             icon={<Money weight='fill' color={theme.colors.orange[5]} size={32} />}
             title='Kas Saat Ini'
-            value={"Rp. " + currCred ?? 0}
+            value={<MoneySpan amount={currCred as number ?? 0}/>}
           />
           <FeatureStats
             icon={<Money weight='fill' color={theme.colors.grape[5]} size={32} />}
             title='Donasi Masuk'
-            value={"Rp. " + donCount ?? 0}
+            value={<MoneySpan amount={donCount as number ?? 0}/>}
           />
           <FeatureStats
             icon={<Money weight='fill' color={theme.colors.orange[5]} size={32} />}
             title='Pengeluaran'
-            value={"Rp. " + expCount ?? 0}
+            value={<MoneySpan amount={expCount as number ?? 0}/>}
           />
           <FeatureStats
             icon={<Users weight='fill' color={theme.colors.blue[5]} size={32} />}

@@ -32,14 +32,14 @@ export const BlogEditorModal = (props: ContextModalProps<{ onClick: (values: Rec
                     <Field
                         name="content"
                         render={({ input, meta }) => (
-                            <Textarea label="Konten" {...input} />
+                            <Textarea label="Konten" {...input} minRows={5}/>
                         )}
                     />
 
                     <Field
                         name="status"
                         render={({ input, meta }) => (
-                            <Select label="Status" data={[{ value: "published", label: "Dipublikasi" }, { value: "draft", label: "Draft" }]}
+                            <Select label="Status" data={[{ value: "published", label: "Dipublikasi" }, { value: "drafted", label: "Draft" }]}
                                 {...input}
                             />
                         )}

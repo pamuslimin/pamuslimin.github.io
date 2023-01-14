@@ -121,7 +121,7 @@ export function ContactPage() {
                   <Field
                     name="sender_phone"
                     render={({ input, meta }) => (
-                      <TextInput {...input} label="No. Telpon"
+                      <TextInput {...input} label="No. Telepon"
                         placeholder="085131827474"
                         required
                         classNames={{ input: classes.input, label: classes.inputLabel }} />

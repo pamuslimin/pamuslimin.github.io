@@ -29,7 +29,7 @@ export const MessageEditorModal = (props: ContextModalProps<{ onClick: (values: 
                         <Field
                             name="sender_phone"
                             render={({ input, meta }) => (
-                                <TextInput label="No. Telpon" {...input} />
+                                <TextInput label="No. Telepon" {...input} />
                             )}
                         />
                         <Field

@@ -14,7 +14,7 @@ const columns = [
     header: "Pengirim",
     accessorKey: "sender_name"
   }, {
-    header: "No. Telpon",
+    header: "No. Telepon",
     accessorKey: "sender_phone"
   }, {
     header: "Subyek",
