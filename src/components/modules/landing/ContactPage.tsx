@@ -114,7 +114,7 @@ export function ContactPage() {
                 document.body.removeChild(link);
               }}
               initialValues={{
-                message: "Hallo, Ingin makan"
+                message: "Assalamualaikum, saya ingin tahu lebih lanjut tentang Panti Asuhan Muslimin Jaya"
               }}
               render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>

@@ -25,6 +25,24 @@ const mockdata = [
       'https://lh3.googleusercontent.com/p/AF1QipMVOfNDPCZWXkaakqTZOfvk5mAcC-OWicmfed5B=w960-h960-n-o-v1',
     date: '22 April 2021',
   },
+  {
+    title: 'Jazakumullah Khoiron Katsiron',
+    image:
+      'https://lh3.googleusercontent.com/p/AF1QipNRnbBsyEdI59xUWIRYdp0vf7CU6x1mXj7OkDZB=s1024-p-no-v1',
+    date: '5 Mei 2021',
+  },
+  {
+    title: 'Percantik dan Tambahkan Kesempurnaan',
+    image:
+      'https://lh3.googleusercontent.com/p/AF1QipPXvAxwV55zJOtR1DBwavXUxj-lYHCCCtvXhLew=w960-h960-n-o-v1',
+    date: '3 Mei 2021',
+  },
+  {
+    title: 'Selamat Menunaikan Ibadah Puasa 1442 H.',
+    image:
+      'https://lh3.googleusercontent.com/p/AF1QipMVOfNDPCZWXkaakqTZOfvk5mAcC-OWicmfed5B=w960-h960-n-o-v1',
+    date: '22 April 2021',
+  },
 ];
 
 const useStyles = createStyles((theme) => ({

@@ -64,7 +64,7 @@ export const ManagementEditorModal = (props: ContextModalProps<{ onClick: (value
                     <Field
                         name="status"
                         render={({ input, meta }) => (
-                            <Select label="Jabatan" data={[{ value: "aktif", label: "Aktif" }, { value: "nonaktif", label: "Non Aktif" }]}
+                            <Select label="Status" data={[{ value: "aktif", label: "Aktif" }, { value: "nonaktif", label: "Non Aktif" }]}
                                 {...input}
                             />
                         )}

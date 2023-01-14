@@ -4,6 +4,7 @@ import QAR from "@/assets/QAR.png";
 import { Check, Copy } from 'phosphor-react';
 import { useMatch } from '@tanstack/react-location';
 import dayjs from 'dayjs';
+import MoneySpan from '../money-span/MoneySpan';
 type Props = {};
 
 type Donation = {
@@ -63,66 +64,66 @@ const DonationBox = (props: Props) => {
     const donations = donors as Array<any> || [];
     return (
         <Box bg={"green"}>
-        <Container size="xl"  p={48} mih={780}>
-            <Title ta="center" order={2} mb={32} color="white">Mulai Berdonasi</Title>
-            <Card w="100%" h={220} withBorder radius='md'>
+            <Container size="xl" p={48} mih={780}>
+                <Title ta="center" order={2} mb={32} color="white">Mulai Berdonasi</Title>
+                <Card w="100%" h={220} withBorder radius='md'>
 
-                <Group align="center" h={170} >
-                    <Text color={'dimmed'}>Anda dapat melakukan scan pada qr berikut untuk berdonasi melalui Ovo, Untuk melakukan donasi via transfer bank, kami menyediakan beberapa pilihan bank yaitu sebagai berikut :</Text>
-                    <Image src={QAR} height='110px' width="110px" />
-                    <Group>
-                        {
-                            bankNumbs?.map((number) => (
-                                <Card shadow="xs" key={number.bankNumber}>
-                                    <Group>
-                                        <Text color="blue">{number.bankname}</Text>
-                                        <CopyButton value={number.banknumber} timeout={2000}>
-                                            {({ copied, copy }) => (
-                                                <Tooltip label={copied ? 'Disalin ke clipboard' : 'Salin Nomor'} withinPortal withArrow position="right">
-                                                    <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
-                                                        {copied ? <Check size={16} /> : <Copy size={16} />}
-                                                    </ActionIcon>
-                                                </Tooltip>
-                                            )}
-                                        </CopyButton>
-                                    </Group>
-                                    <Text color="dark">{number.banknumber}</Text>
-                                    <Text color="dimmed">{number.holdername}</Text>
-                                </Card>))
-                        }
+                    <Group align="center" h={170} >
+                        <Text color={'dimmed'}>Anda dapat melakukan scan pada qr berikut untuk berdonasi melalui Ovo, Untuk melakukan donasi via transfer bank, kami menyediakan beberapa pilihan bank yaitu sebagai berikut :</Text>
+                        <Image src={QAR} height='110px' width="110px" />
+                        <Group>
+                            {
+                                bankNumbs?.map((number) => (
+                                    <Card shadow="xs" key={number.bankNumber}>
+                                        <Group>
+                                            <Text color="blue">{number.bankname}</Text>
+                                            <CopyButton value={number.banknumber} timeout={2000}>
+                                                {({ copied, copy }) => (
+                                                    <Tooltip label={copied ? 'Disalin ke clipboard' : 'Salin Nomor'} withinPortal withArrow position="right">
+                                                        <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
+                                                            {copied ? <Check size={16} /> : <Copy size={16} />}
+                                                        </ActionIcon>
+                                                    </Tooltip>
+                                                )}
+                                            </CopyButton>
+                                        </Group>
+                                        <Text color="dark">{number.banknumber}</Text>
+                                        <Text color="dimmed">{number.holdername}</Text>
+                                    </Card>))
+                            }
+                        </Group>
                     </Group>
-                </Group>
 
-            </Card>
+                </Card>
 
 
-            <Card mt={16} shadow="sm" p={0} radius="md" withBorder style={{ minHeight: 700 }}>
-                <Text ta="center" size={18} p={12}>
-                    Terimakasih kepada para donatur yang sudah berdonasi.</Text>
+                <Card mt={16} shadow="sm" p={0} radius="md" withBorder style={{ minHeight: 700 }}>
+                    <Text ta="center" size={18} p={12}>
+                        Terimakasih kepada para donatur yang sudah berdonasi.</Text>
 
-                <Table cellSpacing="lg" verticalSpacing={"md"}>
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Nama</th>
-                            <th>Nominal</th>
-                            <th>Tanggal Diterima</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            donations?.map((donation, index) => (
-                                <tr key={donation.id}>
-                                    <td> {index + 1} </td>
-                                    <td> {donation.donorName} </td>
-                                    <td> {donation.amount} </td>
-                                    <td> {dayjs(donation.date).toString()}</td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table></Card>
-        </Container></Box>
+                    <Table cellSpacing="lg" verticalSpacing={"md"}>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Nama</th>
+                                <th>Nominal</th>
+                                <th>Tanggal Diterima</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                donations?.map((donation, index) => (
+                                    <tr key={donation.id}>
+                                        <td> {index + 1} </td>
+                                        <td> {donation.donorName} </td>
+                                        <td><MoneySpan amount={donation.amount} /> </td>
+                                        <td> {dayjs(donation.date).toString()}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </Table></Card>
+            </Container></Box>
     );
 };
 

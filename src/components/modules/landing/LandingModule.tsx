@@ -3,7 +3,7 @@ import DonationBox from "@/components/elements/donation-box/DonationBox";
 import { FeatureCard } from "@/components/elements/feature-card/FeatureCard";
 import { HeaderResponsive } from "@/components/elements/header-responsive/HeaderResponsive";
 import { HeroAlt } from "@/components/elements/hero-alt/HeroAlt";
-import { AppShell, Box, Button, Center, Container, Footer, Grid, Group, Paper, ScrollArea, SimpleGrid, Stack, Text, Title, useMantineTheme } from "@mantine/core";
+import { AppShell, Box, Button, Center, Container, Footer, Grid, Group, Paper, ScrollArea, SimpleGrid, Stack, Text, Title, UnstyledButton, useMantineTheme } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
 import { openContextModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
@@ -92,11 +92,11 @@ const LandingModule = () => {
               <Grid.Col span="auto" >
                 <Stack mr={32} spacing={4}>
                   <Title mb={16} mt={4} color="white" order={4}>Menu</Title>
-                  <Text size="sm" color="white">Beranda</Text>
-                  <Text size="sm" color="white">Tentang Kami</Text>
-                  <Text size="sm" color="white">Donasi</Text>
-                  <Text size="sm" color="white">Kontak</Text>
-                  <Text size="sm" color="white">Berita</Text>
+                  <UnstyledButton onClick={() => navigate({ to: "/home", replace: true })}>  <Text size="sm" color="white">Beranda</Text></UnstyledButton>
+                  <UnstyledButton onClick={() => navigate({ to: "/about", replace: true })}>  <Text size="sm" color="white">Tentang Kami</Text></UnstyledButton>
+                  <UnstyledButton onClick={() => navigate({ to: "/donation", replace: true })}>  <Text size="sm" color="white">Donasi</Text></UnstyledButton>
+                  <UnstyledButton onClick={() => navigate({ to: "/contacts", replace: true })}>  <Text size="sm" color="white">Kontak</Text></UnstyledButton>
+                  <UnstyledButton onClick={() => navigate({ to: "/news", replace: true })}>  <Text size="sm" color="white">Berita</Text></UnstyledButton>
                 </Stack>
               </Grid.Col>
               <Grid.Col span={3}>
@@ -105,7 +105,7 @@ const LandingModule = () => {
                     Salurkan Donasi Terbaik Anda
 
                   </Title>
-                  <Button variant="light">Donasi</Button>
+                  <Button variant="light" onClick={() => navigate({ to: "/donation", replace: true })}>Donasi</Button>
                 </Stack></Grid.Col></Grid>
           </Box>
 

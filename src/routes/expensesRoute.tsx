@@ -1,3 +1,4 @@
+import MoneySpan from "@/components/elements/money-span/MoneySpan";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
@@ -16,7 +17,7 @@ const columns = [
   }, {
     header: "Tanggal Keluar",
     accessorKey: "date",
-    accessorFn: row => dayjs(row?.date).toString(),
+    accessorFn: row => dayjs(row?.date).format("dddd, DD MMMM YYYY"),
   },
   {
     header: "Deskripsi",
@@ -25,7 +26,7 @@ const columns = [
   {
     header: "Jumlah",
     accessorKey: "amount",
-    accessorFn: (row) => `Rp. ${row?.amount}`
+    cell: (ctx) => <MoneySpan amount={ctx?.row?.original?.amount} />,
   },
 ]satisfies ColumnDef<any, unknown>[];
 

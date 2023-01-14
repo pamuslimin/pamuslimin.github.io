@@ -36,7 +36,7 @@ const columns = [
     accessorKey: "role",
     cell: (ctx: any) => {
       const val = ctx?.cell?.getValue() as string;
-      return <Badge color={val.toLocaleLowerCase() === "kepala pengurus" ? "blue" : "teal"}>{val}</Badge>;
+      return <Badge color={val?.toLocaleLowerCase() === "kepala pengurus" ? "blue" : "teal"}>{val}</Badge>;
     }
   },
   {
@@ -62,7 +62,9 @@ export const managementRoute: Route = {
       columns,
       filterColumn,
       initialValues: {
-        birthdate: "2001-1-1"
+        birthdate: "2001-1-1",
+        status: "aktif",
+        role: "pengurus"
       }
     });
   }

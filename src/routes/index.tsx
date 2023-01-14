@@ -51,7 +51,7 @@ export const Routes: Route[] = [
           )),
         loader: async () => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(1, 10).order('date');
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(0, 10).order('date');
           return ({
             id: "home",
             bankNumbers: data,
@@ -114,7 +114,7 @@ export const Routes: Route[] = [
           )),
         loader: async ({ params: { id } }) => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(1, 10).order('date');
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(0, 10).order('date');
           return ({
             id,
             bankNumbers: data,

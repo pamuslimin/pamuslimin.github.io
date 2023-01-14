@@ -36,6 +36,15 @@ export const BlogEditorModal = (props: ContextModalProps<{ onClick: (values: Rec
                         )}
                     />
 
+                    <Field
+                        name="status"
+                        render={({ input, meta }) => (
+                            <Select label="Status" data={[{ value: "published", label: "Dipublikasi" }, { value: "draft", label: "Draft" }]}
+                                {...input}
+                            />
+                        )}
+                    />
+
 
                     <Group position="apart" grow>
                         <Button fullWidth mt="md" variant="light" type="button" onClick={() => context.closeModal(id)}>
