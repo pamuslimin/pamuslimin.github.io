@@ -4,6 +4,8 @@ import QAR from "@/assets/QAR.png";
 import { Check, Copy } from 'phosphor-react';
 import { useMatch } from '@tanstack/react-location';
 import dayjs from 'dayjs';
+import "dayjs/locale/id";
+dayjs.locale("id");
 import MoneySpan from '../money-span/MoneySpan';
 type Props = {};
 
@@ -101,7 +103,7 @@ const DonationBox = (props: Props) => {
                     <Text ta="center" size={18} p={12}>
                         Terimakasih kepada para donatur yang sudah berdonasi.</Text>
 
-                    <Table cellSpacing="lg" verticalSpacing={"md"}>
+                    <Table cellSpacing="lg" verticalSpacing={"md"} cellPadding="md" horizontalSpacing="lg">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -117,7 +119,7 @@ const DonationBox = (props: Props) => {
                                         <td> {index + 1} </td>
                                         <td> {donation.donorName} </td>
                                         <td><MoneySpan amount={donation.amount} /> </td>
-                                        <td> {dayjs(donation.date).toString()}</td>
+                                        <td> {dayjs(donation.date).locale("id-ID").format("dddd, DD MMMM YYYY")}</td>
                                     </tr>
                                 ))
                             }

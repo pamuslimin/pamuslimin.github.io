@@ -11,9 +11,9 @@ import { Testimonials } from "./Testimonials";
 const getPresetTop: Record<string, number> = {
   "home": 0,
   "about": 540,
-  "donation": 1500,
-  "contacts": 2600,
-  "news": 3200,
+  "donation": 1680,
+  "contacts": 2780,
+  "news": 3380,
 };
 const LandingModule = () => {
   const {
