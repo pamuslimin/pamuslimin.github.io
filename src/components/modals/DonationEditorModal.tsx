@@ -41,14 +41,9 @@ export const DonationEditorModal = (props: ContextModalProps<{ onClick: (values:
                         )}
                     />
                     <Field
-                        name="source"
-                        render={({ input, meta }) => (
-                            <TextInput label="Sumber" {...input} />
-                        )}
-                    /> <Field
                     name="source"
                     render={({ input, meta }) => (
-                        <Select label="Status" data={[{ value: "ovo", label: "OVO" }, { value: "transfer bank", label: "Transfer Bank" }, {value: "Cash", label:"Cash"}]}
+                        <Select label="Sumber" data={[{ value: "ovo", label: "OVO" }, { value: "transfer bank", label: "Transfer Bank" }, {value: "Cash", label:"Cash"}]}
                             {...input}
                         />
                     )}
