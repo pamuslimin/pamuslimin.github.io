@@ -48,8 +48,6 @@ export const OrphanEditorModal = (props: ContextModalProps<{ onClick: (values: R
                                 <Select label="Jenis Kelamin" data={[{ value: "false", label: "Perempuan" }, { value: "true", label: "Laki Laki" }]}
                                     onChange={(v) => {
                                         input.onChange(v);
-                                        console.log(input.value);
-                                        console.log(v);
                                     }}
                                     value={`${input.value === "true" || input.value === true}`}
                                 />

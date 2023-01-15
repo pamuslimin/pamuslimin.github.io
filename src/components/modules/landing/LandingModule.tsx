@@ -1,17 +1,11 @@
 import { AboutUs } from "@/components/elements/about/AboutUs";
 import DonationBox from "@/components/elements/donation-box/DonationBox";
-import { FeatureCard } from "@/components/elements/feature-card/FeatureCard";
 import { HeaderResponsive } from "@/components/elements/header-responsive/HeaderResponsive";
 import { HeroAlt } from "@/components/elements/hero-alt/HeroAlt";
-import { AppShell, Box, Button, Center, Container, Footer, Grid, Group, Paper, ScrollArea, SimpleGrid, Stack, Text, Title, UnstyledButton, useMantineTheme } from "@mantine/core";
-import { useScrollIntoView } from "@mantine/hooks";
-import { openContextModal } from "@mantine/modals";
-import { showNotification } from "@mantine/notifications";
-import { Link, useMatch, useNavigate } from "@tanstack/react-location";
-import { Check } from "phosphor-react";
-import { createRef, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { AppShell, Box, Button, Center, Footer, Grid, Stack, Text, Title, UnstyledButton } from "@mantine/core";
+import { useMatch, useNavigate } from "@tanstack/react-location";
+import { useCallback, useLayoutEffect } from "react";
 import { ContactPage } from "./ContactPage";
-import styles from "./Landing.module.scss";
 import { NewsPage } from "./NewsPage";
 import { Testimonials } from "./Testimonials";
 const getPresetTop: Record<string, number> = {
