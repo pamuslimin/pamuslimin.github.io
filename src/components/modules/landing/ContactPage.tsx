@@ -106,7 +106,6 @@ export function ContactPage() {
           <div className={classes.form}>
             <Form onSubmit={
               function (values: Record<string, any>): void {
-
                 const link = document.createElement("a");
                 link.setAttribute("href", "https://wa.me/6281213516824?text=" + encodeURIComponent(values.message),);
                 document.body.appendChild(link);
@@ -120,7 +119,6 @@ export function ContactPage() {
                 <form onSubmit={handleSubmit}>
                   <Field
                     name="sender_phone"
-                    validate={(x) => x !== ""}
                     render={({ input, meta }) => (
                       <TextInput {...input} label="No. Telepon"
                         placeholder="085131827474"
@@ -130,7 +128,6 @@ export function ContactPage() {
                   />
                   <Field
                     name="sender_name"
-                    validate={(x) => x !== ""}
                     render={({ input, meta }) => (
                       <TextInput label="Nama" {...input}
                         mt="md"
