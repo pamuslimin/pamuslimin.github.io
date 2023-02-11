@@ -72,8 +72,24 @@ const DonationBox = (props: Props) => {
 
                     <Group align="center" h={170} >
                         <Text color={'dimmed'}>Anda dapat melakukan scan pada qr berikut untuk berdonasi melalui Ovo, Untuk melakukan donasi via transfer bank, kami menyediakan beberapa pilihan bank yaitu sebagai berikut :</Text>
-                        <Image src={QAR} height='110px' width="110px" />
+
                         <Group>
+                            <Card shadow="xs">
+                                <Group>
+                                    <Text color="blue">OVO</Text>
+                                    <CopyButton value={"082113091006"} timeout={2000}>
+                                        {({ copied, copy }) => (
+                                            <Tooltip label={copied ? 'Disalin ke clipboard' : 'Salin Nomor'} withinPortal withArrow position="right">
+                                                <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
+                                                    {copied ? <Check size={16} /> : <Copy size={16} />}
+                                                </ActionIcon>
+                                            </Tooltip>
+                                        )}
+                                    </CopyButton>
+                                </Group>
+                                <Text color="dark">{"082113091006"}</Text>
+                                <Text color="dimmed">{"Panti Muslimin Jaya"}</Text>
+                            </Card>
                             {
                                 bankNumbs?.map((number) => (
                                     <Card shadow="xs" key={number.bankNumber}>

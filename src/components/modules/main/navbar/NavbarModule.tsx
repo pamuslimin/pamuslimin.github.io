@@ -160,7 +160,7 @@ function NavLinkItem(item: NavbarLinkProps, expanded: boolean): JSX.Element {
     return <NavbarLink {...item} level={1} key={item.label} isExpanded={expanded} />;
   }
   return (
-    <Link to={item?.href ? `/${item?.href}` : "#"} key={item.href} aria-labeled-by={item.label}>
+    <Link to={item?.href ? `/${item?.href}` : "#"} replace={true} key={item.href} aria-labeled-by={item.label}>
       {({ isActive }) => (
         <NavbarLink {...item} level={1} key={item.label} active={isActive} isExpanded={expanded} />
       )}

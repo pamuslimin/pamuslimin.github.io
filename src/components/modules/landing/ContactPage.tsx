@@ -9,7 +9,9 @@ import {
   Group, Stack,
   ActionIcon,
   Container,
+  Tabs,
 } from '@mantine/core';
+import { IconMessage, IconMessageCircle } from '@tabler/icons';
 import { useNavigate } from '@tanstack/react-location';
 import { MapPin, Phone } from 'phosphor-react';
 import { Field, Form } from 'react-final-form';
@@ -104,60 +106,121 @@ export function ContactPage() {
             </Stack>
           </div>
           <div className={classes.form}>
-            <Form onSubmit={
-              function (values: Record<string, any>): void {
-                const link = document.createElement("a");
-                link.setAttribute("href", "https://wa.me/6281213516824?text=" + encodeURIComponent(values.message),);
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              }}
-              initialValues={{
-                message: "Assalamualaikum, saya ingin tahu lebih lanjut tentang Panti Asuhan Muslimin Jaya"
-              }}
-              render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
-                  <Field
-                    name="sender_phone"
-                    render={({ input, meta }) => (
-                      <TextInput {...input} label="No. Telepon"
-                        placeholder="085131827474"
-                        required
-                        classNames={{ input: classes.input, label: classes.inputLabel }} />
-                    )}
-                  />
-                  <Field
-                    name="sender_name"
-                    render={({ input, meta }) => (
-                      <TextInput label="Nama" {...input}
-                        mt="md"
-                        required
-                        placeholder='Rahmat'
-                        classNames={{ input: classes.input, label: classes.inputLabel }} />
-                    )}
-                  />
-                  <Field
-                    name="message"
-                    render={({ input, meta }) => (
-
-                      <Textarea
-                        required
-                        label="Pesan anda"
-                        placeholder="isi dengan pesan minimal 30 kata"
-                        minRows={4}
-                        mt="md"
-                        classNames={{ input: classes.input, label: classes.inputLabel }} {...input}
+            <Tabs>
+              <Tabs.List>
+                <Tabs.Tab value="feedback" icon={IconMessage}>Feedback</Tabs.Tab>
+                <Tabs.Tab value="donation" icon={IconMessageCircle}>Donasi</Tabs.Tab>
+              </Tabs.List>
+              <Tabs.Panel value='feedback'>
+                <Form onSubmit={
+                  function (values: Record<string, any>): void {
+                    const link = document.createElement("a");
+                    link.setAttribute("href", "https://wa.me/6281213516824?text=" + encodeURIComponent(values.message),);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  initialValues={{
+                    message: "Assalamualaikum, saya ingin tahu lebih lanjut tentang Panti Asuhan Muslimin Jaya"
+                  }}
+                  render={({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit}>
+                      <Field
+                        name="sender_phone"
+                        render={({ input, meta }) => (
+                          <TextInput {...input} label="No. Telepon"
+                            placeholder="085131827474"
+                            required
+                            classNames={{ input: classes.input, label: classes.inputLabel }} />
+                        )}
                       />
-                    )}
-                  />
-                  <Group position="right" mt="md">
-                    <Button className={classes.control} type="submit">Send message</Button>
-                  </Group>
-                </form>
-              )
-              }
-            />
+                      <Field
+                        name="sender_name"
+                        render={({ input, meta }) => (
+                          <TextInput label="Nama" {...input}
+                            mt="md"
+                            required
+                            placeholder='Rahmat'
+                            classNames={{ input: classes.input, label: classes.inputLabel }} />
+                        )}
+                      />
+                      <Field
+                        name="message"
+                        render={({ input, meta }) => (
 
+                          <Textarea
+                            required
+                            label="Pesan anda"
+                            placeholder="isi dengan pesan minimal 30 kata"
+                            minRows={4}
+                            mt="md"
+                            classNames={{ input: classes.input, label: classes.inputLabel }} {...input}
+                          />
+                        )}
+                      />
+                      <Group position="right" mt="md">
+                        <Button className={classes.control} type="submit">Kirim</Button>
+                      </Group>
+                    </form>
+                  )
+                  }
+                /></Tabs.Panel>
+
+              <Tabs.Panel value='donation'>
+                <Form onSubmit={
+                  function (values: Record<string, any>): void {
+                    const link = document.createElement("a");
+                    link.setAttribute("href", "https://wa.me/6281213516824?text=" + encodeURIComponent(values.message),);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  initialValues={{
+                    message: "Assalamualaikum, saya ingin mengonfirmasi donasi saya berjumlah Rp. "
+                  }}
+                  render={({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit}>
+                      <Field
+                        name="nilai donasi"
+                        render={({ input, meta }) => (
+                          <TextInput {...input} label="No. Telepon"
+                            placeholder="085131827474"
+                            required
+                            classNames={{ input: classes.input, label: classes.inputLabel }} />
+                        )}
+                      />
+                      <Field
+                        name="sender_name"
+                        render={({ input, meta }) => (
+                          <TextInput label="Nama" {...input}
+                            mt="md"
+                            required
+                            placeholder='Rahmat'
+                            classNames={{ input: classes.input, label: classes.inputLabel }} />
+                        )}
+                      />
+                      <Field
+                        name="message"
+                        render={({ input, meta }) => (
+
+                          <Textarea
+                            required
+                            label="Pesan anda"
+                            placeholder="isi dengan pesan minimal 30 kata"
+                            minRows={4}
+                            mt="md"
+                            classNames={{ input: classes.input, label: classes.inputLabel }} {...input}
+                          />
+                        )}
+                      />
+                      <Group position="right" mt="md">
+                        <Button className={classes.control} type="submit">Konfirmasi</Button>
+                      </Group>
+                    </form>
+                  )
+                  }
+                /></Tabs.Panel>
+            </Tabs>
           </div>
         </SimpleGrid>
       </div></Container>

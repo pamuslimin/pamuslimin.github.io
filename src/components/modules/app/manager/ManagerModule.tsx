@@ -7,7 +7,7 @@ import { openConfirmModal, openContextModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { useMatch, useNavigate } from '@tanstack/react-location';
 import { ColumnDef } from '@tanstack/react-table';
-import { PencilSimple, Plus, TrashSimple } from 'phosphor-react';
+import { Download, PencilSimple, Plus, TrashSimple } from 'phosphor-react';
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext, } from './AppContext';
 
@@ -22,9 +22,10 @@ const ManagerModule = (props: Props) => {
         columns,
         filterColumn,
         editorModal,
-        initialValues
+        initialValues,
+        status,
     } } = useMatch();
-    const { items, metas, filter, setFilter, setPage, getAllItem, updateItem, deleteItem, addItem } = useContext(AppContext);
+    const { items, metas, filter, setFilter, setPage, setStatus, getAllItem, updateItem, deleteItem, addItem } = useContext(AppContext);
 
     const columnswithActions: ColumnDef<any, unknown>[] = [
         ...(columns as ColumnDef<any, unknown>[]),
@@ -71,18 +72,20 @@ const ManagerModule = (props: Props) => {
     }satisfies useDataTableProps<any>);
 
     useEffect(() => {
-        getAllItem?.(table as string);
+        setStatus(status);
+        getAllItem?.(table as string, status as string);
     }, [table]);
 
     useEffect(() => {
         if (state?.pagination?.pageIndex) {
             setPage(state?.pagination?.pageIndex);
-            getAllItem?.(table as string);
+            getAllItem?.(table as string, status as string);
         }
     }, [state?.pagination]);
 
     useEffect(() => {
-        getAllItem?.(table as string, filterColumn as string ?? undefined);
+
+        getAllItem?.(table as string, status as string, filterColumn as string ?? undefined);
     }, [filter]);
 
     return (
@@ -90,14 +93,16 @@ const ManagerModule = (props: Props) => {
         <Container size="xl">
             <Stack>
                 <Group position='apart' mt={16}>
-                    <Button leftIcon={<Plus weight='bold' />} onClick={() => openContextModal({
-                        modal: editorModal as string,
-                        title: `Tambah ${entity ?? "Entitas"}`,
-                        innerProps: {
-                            onClick: (data: any) => addItem?.(table as string, data),
-                            initialValues: initialValues,
-                        }
-                    })}>{`Tambah ${entity ?? "Entitas"}`}</Button>
+                    <Group>
+                        <Button leftIcon={<Plus weight='bold' />} onClick={() => openContextModal({
+                            modal: editorModal as string,
+                            title: `Tambah ${entity ?? "Entitas"}`,
+                            innerProps: {
+                                onClick: (data: any) => addItem?.(table as string, data),
+                                initialValues: initialValues,
+                            }
+                        })}>{`Tambah ${entity ?? "Entitas"}`}</Button>
+                        <Button leftIcon={<Download weight='bold' />} variant="outline">{`Download CSV`}</Button></Group>
                     <SearchBar onClick={(value) => setFilter(value)} />
                 </Group>
                 <Card withBorder p={0}>

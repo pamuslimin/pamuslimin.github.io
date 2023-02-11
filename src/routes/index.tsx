@@ -7,6 +7,7 @@ import { expensesRoute } from "./expensesRoute";
 import { managementRoute } from "./managementRoute";
 import { messagesRoute } from "./messagesRoute";
 import { orphanRoute } from "./orphanRoute";
+import { pendingDonationRoute } from "./pendingDonationRoute";
 
 // Create a hash history
 const hashHistory = createHashHistory();
@@ -51,7 +52,7 @@ export const Routes: Route[] = [
           )),
         loader: async () => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(0, 10).order('date', { ascending: false });
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(0, 9).order('date', { ascending: false });
           return ({
             id: "home",
             bankNumbers: data,
@@ -87,6 +88,7 @@ export const Routes: Route[] = [
           managementRoute,
           expensesRoute,
           donationRoute,
+          pendingDonationRoute,
           blogRoute,
           messagesRoute,
           {
@@ -114,7 +116,7 @@ export const Routes: Route[] = [
           )),
         loader: async ({ params: { id } }) => {
           const { data, error } = await supabase.from("bank_accounts").select("banknumber, bankname, holdername");
-          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(0, 10).order('date', { ascending: false });
+          const { data: donors } = await supabase.from("donations").select("donorName, amount, date").range(0, 9).order('date', { ascending: false });
           return ({
             id,
             bankNumbers: data,

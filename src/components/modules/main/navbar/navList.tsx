@@ -7,7 +7,8 @@ import {
   TreeStructure,
   UserCircleGear,
   Users,
-  UsersThree
+  UsersThree,
+  WaveTriangle
 } from "phosphor-react";
 import { NavbarLinkProps } from "./NavbarModule";
 
@@ -31,6 +32,11 @@ export const navList: NavbarLinkProps[] = [
     icon: (active: boolean) => <Export size={24} weight={active ? "fill" : "regular"} />,
     label: "Pengeluaran",
     href: "./app/expenses",
+  },
+  {
+    icon: (active: boolean) => <WaveTriangle size={24} weight={active ? "fill" : "regular"} />,
+    label: "Pending Donasi",
+    href: "./app/pending",
   },
   {
     icon: (active: boolean) => <Money size={24} weight={active ? "fill" : "regular"} />,

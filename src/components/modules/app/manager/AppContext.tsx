@@ -9,8 +9,9 @@ export const AppContext = createContext<{
   adding?: boolean,
   filter?: string,
   setFilter?: any,
+  setStatus?: any,
   setPage?: any,
-  getAllItem?: (table: string, filterCol?: string) => void,
+  getAllItem?: (table: string, status: string, filterCol?: string) => void,
   deleteItem?: (table: string, id: string) => void,
   addItem?: (table: string, data: any) => void,
   updateItem?: (table: string, { id, ...item }: any) => void,
@@ -43,9 +44,10 @@ export function AppContextProvider({ children }: PropsWithChildren<any>) {
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
   const [filter, setFilter] = useState("");
+  const [statuses, setStatus] = useState<string | undefined>(undefined);
   const [page, setPage] = useState(0);
 
-  const getAllItem = async (table: string, filterCol?: string) => {
+  const getAllItem = async (table: string, status?: string, filterCol?: string) => {
     setLoading(true);
     try {
 
@@ -56,6 +58,10 @@ export function AppContextProvider({ children }: PropsWithChildren<any>) {
         .select("*", { count: "exact" })
         .order("id", { ascending: false });
 
+      if (status) {
+        query = query.eq("status", status);
+      }
+
       if (filterCol && filter) {
         query = query.ilike(filterCol, `%${filter}%`);
       }
@@ -63,7 +69,7 @@ export function AppContextProvider({ children }: PropsWithChildren<any>) {
 
       if (error) throw error;
       if (data) {
-        setItems((old) => ({ ...old, [table]: [ ...data ] }));
+        setItems((old) => ({ ...old, [table]: [...data] }));
         setMeta((old) => ({ ...old, [table]: { page: page, pageSize: pageSize, totalPage: ((count ?? pageSize) / pageSize) + 1, totalData: count ?? 0 } }));
       }
 
@@ -138,6 +144,7 @@ export function AppContextProvider({ children }: PropsWithChildren<any>) {
         metas,
         loading, filter,
         adding,
+        setStatus,
         setFilter,
         setPage,
         getAllItem,

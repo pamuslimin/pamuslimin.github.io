@@ -2,10 +2,10 @@ import MoneySpan from "@/components/elements/money-span/MoneySpan";
 import { ColumnDef } from "@tanstack/react-table";
 
 const table = 'donations';
+const status = "pending";
 const editorModal = "donation-editor";
-const entity = "Donasi";
-const status = "confirmed";
-const filterColumn = "donorName";
+const entity = "Donasi Tertahan";
+const filterColumn = "donatur";
 const columns = [
   {
     header: "No",
@@ -14,17 +14,16 @@ const columns = [
   },
   {
     header: "Donatur",
-    accessorKey: "donorName"
+    accessorKey: "donatur"
   },
   {
-    header: "Jumlah",
-    accessorKey: "amount",
-    cell: (ctx) => <MoneySpan amount={ctx?.row?.original?.amount} />,
+    header: "active",
+    accessorKey: "conf",
   },
 ]satisfies ColumnDef<any, unknown>[];
 
-export const donationRoute = {
-  path: "/income",
+export const pendingDonationRoute = {
+  path: "/pending",
   element: async () => import("@/components/modules/app/manager/ManagerModule").then(
     ({ default: Component }) => <Component />
   ),
@@ -33,11 +32,11 @@ export const donationRoute = {
     breadcrumb: () => entity
   },
   loader: async () => ({
-    status,
     table,
     entity,
     editorModal,
     columns,
     filterColumn,
+    status,
   })
 };

@@ -28,6 +28,7 @@ const columns = [
     }
   },
 ]satisfies ColumnDef<any, unknown>[];
+
 export const blogRoute = {
   path: "/blog",
   element: async () => import("@/components/modules/app/manager/ManagerModule").then(
@@ -37,13 +38,12 @@ export const blogRoute = {
   meta: {
     breadcrumb: () => entity
   },
-  loader: async () => {
-    return ({
-      table,
-      entity,
-      editorModal,
-      columns,
-      filterColumn,
-    });
-  }
+  loader: async () => ({
+    table,
+    entity,
+    editorModal,
+    columns,
+    filterColumn,
+  })
+
 };

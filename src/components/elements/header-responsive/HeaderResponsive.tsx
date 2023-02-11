@@ -85,6 +85,7 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   const handleLogin = useCallback(() => {
     navigate({ to: "/auth/login" });
   }, [navigate]);
+  
   const items = links.map((link) => (
     <Link
       key={link.label}
@@ -109,6 +110,8 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
+
+        <Button variant="light" onClick={handleLogin}>Masuk</Button>
 
 
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
