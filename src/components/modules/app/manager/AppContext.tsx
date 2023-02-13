@@ -11,6 +11,7 @@ export const AppContext = createContext<{
   setFilter?: any,
   setStatus?: any,
   setPage?: any,
+  downloadAll?: (table: string, status: string, filterCol?: string) => void,
   getAllItem?: (table: string, status: string, filterCol?: string) => void,
   deleteItem?: (table: string, id: string) => void,
   addItem?: (table: string, data: any) => void,
@@ -47,12 +48,11 @@ export function AppContextProvider({ children }: PropsWithChildren<any>) {
   const [statuses, setStatus] = useState<string | undefined>(undefined);
   const [page, setPage] = useState(0);
 
-  const getAllItem = async (table: string, status?: string, filterCol?: string) => {
+
+  const downloadAll = async (table: string, status?: string, filterCol?: string) => {
     setLoading(true);
     try {
 
-      const pageSize = 10;
-      const { from, to } = getPagination(page, pageSize);
       let query = supabase
         .from(table)
         .select("*", { count: "exact" })
@@ -65,15 +65,59 @@ export function AppContextProvider({ children }: PropsWithChildren<any>) {
       if (filterCol && filter) {
         query = query.ilike(filterCol, `%${filter}%`);
       }
-      const { data, error, count } = await query.range(from, to);
+
+      const { data } = await query.csv();
+
+
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += data;
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", table + ".csv");
+      document.body.appendChild(link); // Required for FF
+      link.click();
+      document.body.removeChild(link);
+
+    } catch (error: any) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getAllItem = async (table: string, status?: string, filterCol?: string, pageSize = 10) => {
+    setLoading(true);
+    try {
+
+      let query = supabase
+        .from(table)
+        .select("*", { count: "exact" })
+        .order("id", { ascending: false });
+
+      if (status) {
+        query = query.eq("status", status);
+      }
+
+      if (filterCol && filter) {
+        query = query.ilike(filterCol, `%${filter}%`);
+      }
+      if (pageSize > 0) {
+        const { from, to } = getPagination(page, pageSize);
+        query = query.range(from, to);
+      }
+
+      const { data, error, count } = await query.returns();
+
 
       if (error) throw error;
       if (data) {
         setItems((old) => ({ ...old, [table]: [...data] }));
-        setMeta((old) => ({ ...old, [table]: { page: page, pageSize: pageSize, totalPage: ((count ?? pageSize) / pageSize) + 1, totalData: count ?? 0 } }));
+        if (pageSize > 0) {
+          setMeta((old) => ({ ...old, [table]: { page: page, pageSize: pageSize, totalPage: ((count ?? pageSize) / pageSize) + 1, totalData: count ?? 0 } }));
+        }
       }
-
-
 
     } catch (error: any) {
       alert(error.error_description || error.message);
@@ -151,6 +195,7 @@ export function AppContextProvider({ children }: PropsWithChildren<any>) {
         deleteItem,
         addItem,
         updateItem,
+        downloadAll,
       }}
     >
       {children}

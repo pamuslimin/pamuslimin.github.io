@@ -24,8 +24,8 @@ const ManagerModule = (props: Props) => {
         editorModal,
         initialValues,
         status,
-    } } = useMatch();
-    const { items, metas, filter, setFilter, setPage, setStatus, getAllItem, updateItem, deleteItem, addItem } = useContext(AppContext);
+    }, pathname } = useMatch();
+    const { items, metas, filter, setFilter, setPage, setStatus, getAllItem, updateItem, deleteItem, addItem, downloadAll } = useContext(AppContext);
 
     const columnswithActions: ColumnDef<any, unknown>[] = [
         ...(columns as ColumnDef<any, unknown>[]),
@@ -74,7 +74,7 @@ const ManagerModule = (props: Props) => {
     useEffect(() => {
         setStatus(status);
         getAllItem?.(table as string, status as string);
-    }, [table]);
+    }, [table, pathname]);
 
     useEffect(() => {
         if (state?.pagination?.pageIndex) {
@@ -102,7 +102,7 @@ const ManagerModule = (props: Props) => {
                                 initialValues: initialValues,
                             }
                         })}>{`Tambah ${entity ?? "Entitas"}`}</Button>
-                        <Button leftIcon={<Download weight='bold' />} variant="outline">{`Download CSV`}</Button></Group>
+                        <Button leftIcon={<Download weight='bold' />} variant="outline" onClick={()=> downloadAll?.(table as string, status as string, filterColumn as string ?? undefined)}>{`Download CSV`}</Button></Group>
                     <SearchBar onClick={(value) => setFilter(value)} />
                 </Group>
                 <Card withBorder p={0}>

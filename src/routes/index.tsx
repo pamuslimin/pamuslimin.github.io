@@ -34,6 +34,12 @@ export const Routes: Route[] = [
               import("@/components/modules/auth/login/LoginModule").then(({ default: Component }) => (
                 <Component />
               )),
+          },  {
+            path: "/donor-login",
+            element: async () =>
+              import("@/components/modules/auth/donor-login/LoginModule").then(({ default: Component }) => (
+                <Component />
+              )),
           },
           {
             path: "/register",

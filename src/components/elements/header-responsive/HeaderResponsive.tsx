@@ -83,7 +83,7 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   const { classes, cx } = useStyles();
   const navigate = useNavigate();
   const handleLogin = useCallback(() => {
-    navigate({ to: "/auth/login" });
+    navigate({ to: "/auth/donor-login" });
   }, [navigate]);
   
   const items = links.map((link) => (

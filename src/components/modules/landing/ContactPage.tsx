@@ -14,6 +14,7 @@ import {
 import { IconMessage, IconMessageCircle } from '@tabler/icons';
 import { useNavigate } from '@tanstack/react-location';
 import { MapPin, Phone } from 'phosphor-react';
+import { useState } from 'react';
 import { Field, Form } from 'react-final-form';
 
 const useStyles = createStyles((theme) => ({
@@ -82,7 +83,7 @@ const useStyles = createStyles((theme) => ({
 
 export function ContactPage() {
   const { classes } = useStyles();
-
+  const [contactTab, setContactTab] = useState<string | null>("feedback");
   const navigate = useNavigate();
 
   return (
@@ -106,10 +107,10 @@ export function ContactPage() {
             </Stack>
           </div>
           <div className={classes.form}>
-            <Tabs>
+            <Tabs value={contactTab} onTabChange={setContactTab}>
               <Tabs.List>
                 <Tabs.Tab value="feedback" icon={IconMessage}>Feedback</Tabs.Tab>
-                <Tabs.Tab value="donation" icon={IconMessageCircle}>Donasi</Tabs.Tab>
+                <Tabs.Tab value="donation" icon={IconMessageCircle}>Kornfirmasi Donasi</Tabs.Tab>
               </Tabs.List>
               <Tabs.Panel value='feedback'>
                 <Form onSubmit={
@@ -128,7 +129,7 @@ export function ContactPage() {
                       <Field
                         name="sender_phone"
                         render={({ input, meta }) => (
-                          <TextInput {...input} label="No. Telepon"
+                          <TextInput {...input} label="No. Telepon" mt={16}
                             placeholder="085131827474"
                             required
                             classNames={{ input: classes.input, label: classes.inputLabel }} />
@@ -181,10 +182,10 @@ export function ContactPage() {
                   render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                       <Field
-                        name="nilai donasi"
+                        name="nilai"
                         render={({ input, meta }) => (
-                          <TextInput {...input} label="No. Telepon"
-                            placeholder="085131827474"
+                          <TextInput {...input} label="Nilai Donasi"  mt={16}
+                            placeholder="Rp. 2.000.000"
                             required
                             classNames={{ input: classes.input, label: classes.inputLabel }} />
                         )}
