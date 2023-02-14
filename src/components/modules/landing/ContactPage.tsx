@@ -98,7 +98,7 @@ export function ContactPage() {
             <Stack>
               <Group>
                 <MapPin color="white" />
-                <Text color="white">Jl. Dr. Saharjo Jl. Sawo IV No.2, RT.3/RW.7, Manggarai Sel., Kec. Tebet, Jakarta, Daerah Khusus Ibukota Jakarta 12860</Text>
+                <Text color="white" w="100%" >Jl. Dr. Saharjo Jl. Sawo IV No.2, RT.3/RW.7, Manggarai Sel., Kec. Tebet, Jakarta, Daerah Khusus Ibukota Jakarta 12860</Text>
               </Group>
               <Group>
                 <Phone color="white" />
@@ -110,7 +110,7 @@ export function ContactPage() {
             <Tabs value={contactTab} onTabChange={setContactTab}>
               <Tabs.List>
                 <Tabs.Tab value="feedback" icon={IconMessage}>Feedback</Tabs.Tab>
-                <Tabs.Tab value="donation" icon={IconMessageCircle}>Kornfirmasi Donasi</Tabs.Tab>
+                <Tabs.Tab value="donation" icon={IconMessageCircle}>Konfirmasi Donasi</Tabs.Tab>
               </Tabs.List>
               <Tabs.Panel value='feedback'>
                 <Form onSubmit={

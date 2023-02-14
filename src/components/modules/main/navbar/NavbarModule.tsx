@@ -14,7 +14,7 @@ import {
 import { ReactNode } from "react";
 
 import { useToggle } from "@mantine/hooks";
-import { Link } from "@tanstack/react-location";
+import { Link, useMatch } from "@tanstack/react-location";
 import {
   CaretDoubleLeft,
   CaretDoubleRight,
@@ -110,7 +110,13 @@ function NavbarLink({ icon, label, active, isExpanded, links, onClick, level }: 
 
 export function Navbar() {
   const [expanded, toggleExpand] = useToggle();
-  const links = navList.map((item) => NavLinkItem(item, expanded));
+  const { data: { navList: newList } } = useMatch();
+  let links: ReactNode[] = [];
+  if (newList) {
+    links = (newList as NavbarLinkProps[]).map((item) => NavLinkItem(item, expanded));
+  } else {
+    links = (navList as NavbarLinkProps[]).map((item) => NavLinkItem(item, expanded));
+  }
 
   return (
     <BaseNavbar width={{ base: expanded ? 220 : 80 }} p='xs'  >

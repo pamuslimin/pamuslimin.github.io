@@ -24,6 +24,10 @@ const   AuthMiddleware = ({ children }: { children: React.ReactNode; }) => {
 
   const storageEventHandler = useCallback(() => {
     const token = localStorage.getItem("accessToken");
+    const phone = localStorage.getItem("phone");
+    if (pathname.match("/auth/*") && phone) {
+      return navigate({ to: "/donor-app/" });
+    }
     if (pathname.match("/auth/*") && token) {
       return navigate({ to: "/app/" });
     }

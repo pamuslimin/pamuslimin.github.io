@@ -2,22 +2,16 @@
 import { supabase } from "@/supabaseClient";
 import { Button, Checkbox, PasswordInput, TextInput, Title, useMantineTheme } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
-import { GoogleLogo } from "phosphor-react";
+import { GoogleLogo, Phone } from "phosphor-react";
 import { Form, Field } from "react-final-form";
 
-const LoginModule = () => { 
+const LoginModule = () => {
   const onSubmit = async (values: any) => {
     try {
-      const { email, password } = values;
-
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-      });
-    
-      if (error) throw error;
-      const { data } = await supabase.auth.getSession()
-      localStorage.setItem("accessToken", data.session?.access_token ?? "");
-      localStorage.setItem("profile", JSON.stringify(data.session?.user));
+      const { phone } = values;
+      localStorage.setItem("accessToken", "user");
+      localStorage.setItem("phone", phone);
+      localStorage.setItem("profile", JSON.stringify({ name: "donor", phone: phone }));
       window.dispatchEvent(new Event("storage"));
     } catch (error) {
       showNotification({
@@ -32,13 +26,16 @@ const LoginModule = () => {
     <Form
       onSubmit={onSubmit}
       initialValues={{
-        email: "",
-        password: "",
+        phone: "",
       }}
       render={({ handleSubmit, submitting }) => (
-        <form onSubmit={handleSubmit}> 
-          <Button leftIcon={<GoogleLogo/>} fullWidth mt='xl' size='md' type='submit' loading={submitting}>
-            Masuk Dengan Google
+        <form onSubmit={handleSubmit}>
+          <Field name="phone"
+            render={({ input }) => {
+              return <TextInput label="Nomor Telepon anda" value={input.value} onChange={input.onChange} />;
+            }} />
+          <Button leftIcon={<Phone />} fullWidth mt='xl' size='md' type='submit' loading={submitting}>
+            Masuk
           </Button>
         </form>
       )}

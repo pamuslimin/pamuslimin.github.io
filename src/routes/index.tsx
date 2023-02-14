@@ -1,6 +1,8 @@
+import { NavbarLinkProps } from "@/components/modules/main/navbar/NavbarModule";
 import { supabase } from "@/supabaseClient";
 import { objectToParameters, parametersToObject } from "@/utils/queryParams";
 import { createHashHistory, Navigate, ReactLocation, Route } from "@tanstack/react-location";
+import { HouseSimple } from "phosphor-react";
 import { blogRoute } from "./blogRoute";
 import { donationRoute } from "./donationRoute";
 import { expensesRoute } from "./expensesRoute";
@@ -34,7 +36,7 @@ export const Routes: Route[] = [
               import("@/components/modules/auth/login/LoginModule").then(({ default: Component }) => (
                 <Component />
               )),
-          },  {
+          }, {
             path: "/donor-login",
             element: async () =>
               import("@/components/modules/auth/donor-login/LoginModule").then(({ default: Component }) => (
@@ -65,6 +67,31 @@ export const Routes: Route[] = [
             donors,
           });
         }
+      },
+      {
+        path: "/donor-app",
+        element: async () =>
+          import("@/components/shell/main/MainShell").then(({ default: Component }) => <Component />),
+        loader: async () => {
+          const navList = [
+            {
+              icon: (active: boolean) => <HouseSimple size={24} weight={active ? "fill" : "regular"} />,
+              label: "Dashboard",
+              href: "donor-app",
+            },
+          ]satisfies NavbarLinkProps[];
+          return { navList };
+
+        },
+        children: [
+          {
+            path: "/",
+            element: async () =>
+              import("@/components/modules/app/dashboard/DonorDashboardModule").then(
+                ({ default: Component }) => <Component />,
+              ),
+          }
+        ]
       },
       {
         path: "/app",

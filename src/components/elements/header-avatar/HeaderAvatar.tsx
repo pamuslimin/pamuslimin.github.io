@@ -42,6 +42,7 @@ const HeaderAvatar = () => {
             localStorage.clear()
             supabase?.auth?.signOut()
             window.dispatchEvent(new Event("storage"))
+            window.location.href = "/";
           }}
         >
           Keluar
