@@ -90,6 +90,15 @@ export const Routes: Route[] = [
               import("@/components/modules/app/dashboard/DonorDashboardModule").then(
                 ({ default: Component }) => <Component />,
               ),
+
+            loader: async () => { 
+              const phone = localStorage.getItem("phone");
+              const { data: donData, error: donError } = await supabase.from("donations").select("amount, date").order("date", { ascending: false }).eq("phone", `$${phone}`);
+             
+              const donCount = donData?.reduce((a, b) => a + b.amount, 0) || 0;
+              
+              return { currCred: donCount };
+            }
           }
         ]
       },

@@ -34,20 +34,32 @@ export const DonationEditorModal = (props: ContextModalProps<{ onClick: (values:
 
 
                     </SimpleGrid>
+                    <Field name="phone" render={({ input, meta }) => (
+                        <TextInput label="Nomor Telepon" {...input} />
+                    )} />
                     <Field
                         name="optional_notes"
                         render={({ input, meta }) => (
                             <TextInput label="Catatan Tambahan" {...input} />
                         )}
                     />
+
                     <Field
-                    name="source"
-                    render={({ input, meta }) => (
-                        <Select label="Sumber" data={[{ value: "ovo", label: "OVO" }, { value: "transfer bank", label: "Transfer Bank" }, {value: "Cash", label:"Cash"}]}
-                            {...input}
-                        />
-                    )}
-                />
+                        name="status"
+                        render={({ input, meta }) => (
+                            <Select label="Status" data={[{ value: "confirmed", label: "Terkonfirmasi" }, { value: "not-confirmed", label: "Belum Terkonfirmasi" }]}
+                                {...input}
+                            />
+                        )}
+                    />
+                    <Field
+                        name="source"
+                        render={({ input, meta }) => (
+                            <Select label="Sumber" data={[{ value: "ovo", label: "OVO" }, { value: "transfer bank", label: "Transfer Bank" }, { value: "Cash", label: "Cash" }]}
+                                {...input}
+                            />
+                        )}
+                    />
                     <Group position="apart" grow>
                         <Button fullWidth mt="md" variant="light" type="button" onClick={() => context.closeModal(id)}>
                             Batal
